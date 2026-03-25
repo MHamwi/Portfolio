@@ -1,0 +1,3784 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mohammad Hamwi — UI/UX Designer</title>
+    <meta
+      name="description"
+      content="UI/UX Designer with 5+ years building digital products, apps, and brand systems. Damascus, Syria — Available globally."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #06090f;
+        --bg2: #0b0f1a;
+        --bg3: #0f1525;
+        --blue: #0055ee;
+        --blm: #2272ff;
+        --bll: #4d94ff;
+        --cyan: #00c8f0;
+        --w: #ecf0ff;
+        --mu: rgba(180, 200, 240, 0.65);
+        --mu2: rgba(180, 200, 240, 0.35);
+        --bd: rgba(60, 120, 255, 0.18);
+        --bd2: rgba(60, 120, 255, 0.09);
+        --card: rgba(10, 15, 28, 0.95);
+        --green: #22d16a;
+        --fh: "Syne", sans-serif;
+        --fb: "DM Sans", sans-serif;
+        --fm: "DM Mono", monospace;
+        --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        --focus-ring: 0 0 0 3px rgba(77, 148, 255, 0.5);
+        --text-high: #f8faff;
+        --text-medium: #b8c8f0;
+        --text-low: #6b80c8;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text-high);
+        font-family: var(--fb);
+        overflow-x: hidden;
+        cursor: none;
+      }
+      
+      /* WCAG Focus Management */
+      *:focus {
+        outline: 2px solid var(--bll);
+        outline-offset: 2px;
+      }
+      
+      *:focus:not(:focus-visible) {
+        outline: none;
+      }
+      
+      *:focus-visible {
+        outline: 2px solid var(--bll);
+        outline-offset: 2px;
+        box-shadow: var(--focus-ring);
+      }
+      
+      /* Skip to main content link */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: var(--blm);
+        color: var(--w);
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 4px;
+        z-index: 10000;
+        font-family: var(--fm);
+        font-size: 12px;
+        font-weight: 600;
+      }
+      
+      .skip-link:focus {
+        top: 6px;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      .hl,
+      .hcw {
+        font-size: 42px;
+      }
+      /* ── CURSOR ── */
+      #cur {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--bll);
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 0 14px var(--blm);
+        transition: background 0.15s;
+      }
+      #cr {
+        width: 38px;
+        height: 38px;
+        border: 1.5px solid rgba(77, 148, 255, 0.3);
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9998;
+        transition: all 0.3s var(--ease);
+      }
+      body.ch #cr {
+        width: 56px;
+        height: 56px;
+        margin: -9px 0 0 -9px;
+        border-color: var(--cyan);
+      }
+      body.ch #cur {
+        background: var(--cyan);
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 500;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 60px;
+        background: linear-gradient(
+          to bottom,
+          rgba(6, 9, 15, 0.97) 70%,
+          transparent
+        );
+        transition:
+          padding 0.3s,
+          background 0.3s;
+      }
+      nav.scrolled {
+        padding: 14px 60px;
+        background: rgba(6, 9, 15, 0.98);
+        border-bottom: 1px solid var(--bd2);
+      }
+      .nlogo {
+        font-family: var(--fh);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+      .nlogo span {
+        color: var(--bll);
+      }
+      .nlinks {
+        display: flex;
+        gap: 32px;
+        list-style: none;
+      }
+      .nlinks a {
+        font-size: 12px;
+        color: var(--text-medium);
+        letter-spacing: 0.04em;
+        transition: color 0.2s;
+        position: relative;
+      }
+      .nlinks a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--bll);
+        transition: width 0.3s var(--ease);
+      }
+      .nlinks a:hover,
+      .nlinks a.act {
+        color: var(--text-high);
+      }
+      .nlinks a:hover::after,
+      .nlinks a.act::after {
+        width: 100%;
+      }
+      .ncta {
+        font-family: var(--fm);
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        background: var(--bll);
+        color: var(--bg);
+        padding: 10px 22px;
+        border-radius: 0px;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .ncta:hover {
+        background: var(--cyan);
+        transform: translateY(-2px);
+        color: var(--bg);
+      }
+
+      /* ══════════════════════════════
+   HERO — fixed 2-column layout
+   Left 52%: content  Right 48%: widgets
+══════════════════════════════ */
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 52% 48%;
+        align-items: center;
+        overflow: hidden;
+        padding: 100px 0 80px;
+      }
+      /* Decorative layers must not participate in grid flow */
+      #cv,
+      .hgrid,
+      .hvign,
+      .glw {
+        position: absolute;
+        pointer-events: none;
+      }
+      /* Canvas needs explicit size so offsetWidth is never 0 */
+      #cv {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+      .hgrid {
+        inset: 0;
+        z-index: 0;
+        background-image:
+          linear-gradient(rgba(60, 120, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(60, 120, 255, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+      }
+      .hvign {
+        inset: 0;
+        z-index: 1;
+        background: radial-gradient(
+          ellipse 100% 80% at 30% 50%,
+          transparent 35%,
+          rgba(6, 9, 15, 0.75) 100%
+        );
+      }
+      .glw {
+        border-radius: 50%;
+        z-index: 0;
+      }
+      .gl1 {
+        width: 900px;
+        height: 900px;
+        top: -250px;
+        left: -150px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 85, 238, 0.1) 0%,
+          transparent 65%
+        );
+        animation: gA 16s ease-in-out infinite alternate;
+      }
+      .gl2 {
+        width: 650px;
+        height: 650px;
+        bottom: -100px;
+        right: -50px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 200, 240, 0.07) 0%,
+          transparent 65%
+        );
+        animation: gB 12s ease-in-out infinite alternate;
+      }
+      @keyframes gA {
+        to {
+          transform: translate(70px, 50px);
+        }
+      }
+      @keyframes gB {
+        to {
+          transform: translate(-50px, -35px);
+        }
+      }
+
+      /* LEFT: hero content */
+      .hcol-left {
+        position: relative;
+        z-index: 10;
+        padding: 120px 50px 80px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 100vh;
+      }
+      .hbadge {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 32px;
+        font-family: var(--fm);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--bll);
+        border: 1px solid rgba(77, 148, 255, 0.27);
+        padding: 6px 16px;
+        border-radius: 2px;
+        animation: fUp 0.8s var(--ease) 0.1s both;
+        width: fit-content;
+      }
+      .hbdot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 8px var(--green);
+        animation: blink 2.2s ease-in-out infinite;
+        flex-shrink: 0;
+      }
+      h1.hh {
+        font-family: var(--fh);
+        font-size: clamp(2.6rem, 4.8vw, 5rem);
+        font-weight: 800;
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        margin-bottom: 28px;
+        animation: fUp 0.8s var(--ease) 0.2s both;
+      }
+      .hl {
+        display: block;
+      }
+      .hcw {
+        display: block;
+        height: 1.1em;
+        overflow: hidden;
+        position: relative;
+      }
+      .cw {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: linear-gradient(120deg, var(--bll), var(--cyan));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.5s var(--ease),
+          transform 0.5s var(--ease);
+        white-space: nowrap;
+      }
+      .cw.on {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .cw.off {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      .hend {
+        display: block;
+        font-size: 0.5em;
+        font-weight: 400;
+        color: var(--mu);
+        margin-top: 10px;
+        font-style: italic;
+        -webkit-text-fill-color: var(--mu);
+        background: none;
+        letter-spacing: 0.01em;
+      }
+      .hdesc {
+        font-size: 15px;
+        line-height: 1.85;
+        color: var(--text-medium);
+        max-width: 480px;
+        font-weight: 300;
+        margin-bottom: 44px;
+        animation: fUp 0.8s var(--ease) 0.35s both;
+      }
+      .hacts {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+        animation: fUp 0.8s var(--ease) 0.48s both;
+      }
+      .btn-p {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--blm);
+        color: var(--w);
+        font-family: var(--fh);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 14px 30px;
+        border-radius: 0px;
+        box-shadow: 0 0 32px rgba(34, 114, 255, 0.35);
+        transition:
+          background 0.2s,
+          box-shadow 0.2s,
+          transform 0.15s;
+      }
+      .btn-p:hover {
+        background: var(--bll);
+        box-shadow: 0 0 48px rgba(77, 148, 255, 0.5);
+        transform: translateY(-2px);
+      }
+      .btn-o {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        color: var(--mu);
+        border: 1px solid var(--bd);
+        padding: 13px 20px;
+        border-radius: 0px;
+        transition:
+          color 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .btn-o:hover {
+        color: var(--w);
+        border-color: rgba(77, 148, 255, 0.4);
+        background: rgba(77, 148, 255, 0.05);
+      }
+      .shint {
+        position: absolute;
+        bottom: 40px;
+        left: 60px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--mu2);
+        animation: fUp 0.8s var(--ease) 0.9s both;
+      }
+      .shl {
+        width: 40px;
+        height: 1px;
+        background: var(--bd);
+      }
+
+      /* RIGHT: widgets column — bento grid layout */
+      .hcol-right {
+        position: relative;
+        z-index: 5;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 40px 20px 10px;
+        overflow: visible;
+      }
+      .wstage {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 10px;
+        max-width: 440px;
+      }
+
+      /* Bento grid assignments */
+      .fw-act  { grid-column: 1; grid-row: 1; }
+      .fw-id   { grid-column: 2; grid-row: 1; }
+      .fw-tool { grid-column: 1; grid-row: 2; }
+      .fw-proc { grid-column: 2; grid-row: 2; }
+      .fw-stat { grid-column: 1; grid-row: 3; }
+      .fw-ring { grid-column: 2; grid-row: 3; }
+
+      /* Each widget entrance animation only (no float on grid) */
+      .fw {
+        pointer-events: auto;
+        animation: wIn 0.65s var(--ease) var(--wi, 0.6s) both;
+      }
+      .fw-act  { --wi: 0.5s; }
+      .fw-id   { --wi: 0.6s; }
+      .fw-tool { --wi: 0.7s; }
+      .fw-proc { --wi: 0.8s; }
+      .fw-stat { --wi: 0.9s; }
+      .fw-ring { --wi: 1.0s; }
+
+      @keyframes wIn {
+        from {
+          opacity: 0;
+          transform: translateY(18px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .wc {
+        background: var(--card);
+        border: 1px solid var(--bd);
+        border-radius: 0px;
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        box-shadow:
+          0 10px 36px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        padding: 14px 16px;
+        height: 100%;
+        transition:
+          box-shadow 0.3s,
+          border-color 0.3s;
+      }
+      .wc:hover {
+        box-shadow:
+          0 18px 52px rgba(0, 85, 238, 0.22),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border-color: rgba(77, 148, 255, 0.35);
+      }
+      .wlbl {
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--mu);
+        margin-bottom: 9px;
+      }
+
+      /* widget: identity */
+      .fw-id .wc {
+        width: 100%;
+      }
+      .wav {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--blm), var(--cyan));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--fh);
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .wn {
+        font-family: var(--fh);
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+      .wr {
+        font-family: var(--fm);
+        font-size: 9px;
+        color: var(--mu);
+        letter-spacing: 0.04em;
+        margin-top: 1px;
+      }
+      .wms {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--bd);
+      }
+      .wms-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+      .wms-n {
+        font-family: var(--fh);
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        color: var(--w);
+      }
+      .wms-n em {
+        color: var(--bll);
+        font-style: normal;
+      }
+      .wms-l {
+        font-family: var(--fm);
+        font-size: 7px;
+        color: var(--mu);
+      }
+      .wavl {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 9px;
+        font-family: var(--fm);
+        font-size: 8px;
+        color: var(--mu);
+      }
+      .wavl::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 6px var(--green);
+        flex-shrink: 0;
+        animation: blink 2s infinite;
+      }
+
+      /* widget: activity */
+      .fw-act .wc {
+        width: 100%;
+      }
+      .wah {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .waht {
+        font-family: var(--fh);
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .wahlv {
+        font-family: var(--fm);
+        font-size: 8px;
+        color: var(--green);
+        letter-spacing: 0.08em;
+      }
+      .war {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 7px;
+      }
+      .war:last-child {
+        margin-bottom: 0;
+      }
+      .wai {
+        width: 22px;
+        height: 22px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        flex-shrink: 0;
+      }
+      .wat {
+        font-size: 10px;
+        color: rgba(180, 200, 240, 0.7);
+        line-height: 1.35;
+      }
+      .wat strong {
+        color: var(--w);
+        font-weight: 500;
+      }
+      .watm {
+        font-family: var(--fm);
+        font-size: 8px;
+        color: var(--mu);
+        white-space: nowrap;
+        margin-left: auto;
+      }
+
+      /* widget: process */
+      .fw-proc .wc {
+        width: 100%;
+      }
+      .wsp {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 10.5px;
+        color: var(--mu);
+        margin-bottom: 7px;
+        line-height: 1;
+      }
+      .wsp:last-child {
+        margin-bottom: 0;
+      }
+      .wsp.done {
+        color: var(--w);
+      }
+      .wsp.now {
+        color: var(--cyan);
+      }
+      .wdot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        border: 1px solid var(--bd2);
+        flex-shrink: 0;
+      }
+      .wsp.done .wdot {
+        background: var(--bll);
+        border-color: var(--bll);
+        box-shadow: 0 0 7px var(--blm);
+      }
+      .wsp.now .wdot {
+        background: var(--cyan);
+        border-color: var(--cyan);
+        animation: blink 1.4s infinite;
+      }
+      .wpb {
+        height: 2px;
+        background: var(--bd);
+        border-radius: 1px;
+        margin-top: 10px;
+        overflow: hidden;
+      }
+      .wpbf {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--blm), var(--cyan));
+        border-radius: 1px;
+        animation: bfill 1.8s var(--ease) 0.8s forwards;
+      }
+      @keyframes bfill {
+        to {
+          width: 65%;
+        }
+      }
+
+      /* widget: stats */
+      .fw-stat .wc {
+        width: 100%;
+      }
+      .wsn {
+        font-family: var(--fh);
+        font-size: 1.5rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.025em;
+        color: var(--w);
+      }
+      .wsn em {
+        color: var(--bll);
+        font-style: normal;
+      }
+      .wsl {
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--mu);
+        margin-top: 1px;
+      }
+      .wsd {
+        height: 1px;
+        background: var(--bd);
+        margin: 9px 0;
+      }
+
+      /* widget: ring */
+      .fw-ring .wc {
+        width: 100%;
+        text-align: center;
+        padding: 16px 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .wrw {
+        position: relative;
+        width: 76px;
+        height: 76px;
+        margin: 0 auto 8px;
+      }
+      .wrsvg {
+        width: 76px;
+        height: 76px;
+        transform: rotate(-90deg);
+      }
+      .wrt {
+        fill: none;
+        stroke: var(--bd);
+        stroke-width: 6;
+      }
+      .wrp {
+        fill: none;
+        stroke: url(#rg);
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-dasharray: 210;
+        stroke-dashoffset: 210;
+        animation: ringin 2s var(--ease) 1.2s forwards;
+      }
+      @keyframes ringin {
+        to {
+          stroke-dashoffset: 31;
+        }
+      }
+      .wrpct {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--fh);
+        font-size: 1.1rem;
+        font-weight: 800;
+      }
+      .wrlbl {
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--mu);
+      }
+
+      /* widget: tools */
+      .fw-tool .wc {
+        padding: 11px 13px;
+      }
+      .wttags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 7px;
+      }
+      .wttag {
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.05em;
+        border: 1px solid var(--bd);
+        border-radius: 20px;
+        padding: 3px 8px;
+        color: rgba(180, 200, 240, 0.6);
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+        cursor: default;
+      }
+      .wttag.on {
+        border-color: rgba(77, 148, 255, 0.45);
+        color: var(--bll);
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.28;
+        }
+      }
+      @keyframes fUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ══ SECTIONS ══ */
+      .sec {
+        padding: 100px 60px;
+        border-top: 1px solid var(--bd2);
+      }
+      .sec.alt {
+        background: var(--bg2);
+      }
+      .sec.alt2 {
+        background: var(--bg3);
+      }
+      .stag {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--bll);
+        border: 1px solid rgba(77, 148, 255, 0.2);
+        padding: 5px 13px;
+        border-radius: 20px;
+        margin-bottom: 16px;
+      }
+      .stag::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--bll);
+        flex-shrink: 0;
+      }
+      h2.sh {
+        font-family: var(--fh);
+        font-size: clamp(2.2rem, 4vw, 3.6rem);
+        font-weight: 800;
+        line-height: 1.07;
+        letter-spacing: -0.03em;
+        margin-bottom: 60px;
+      }
+      h2.sh em {
+        font-style: italic;
+        color: var(--bll);
+      }
+      .rv {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.65s var(--ease),
+          transform 0.65s var(--ease);
+      }
+      .rv.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .rv.d1 {
+        transition-delay: 0.1s;
+      }
+      .rv.d2 {
+        transition-delay: 0.2s;
+      }
+      .divider {
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--blm) 25%,
+          var(--cyan) 50%,
+          var(--blm) 75%,
+          transparent
+        );
+        opacity: 0.2;
+      }
+
+      /* ══ ABOUT ══ */
+      .agrid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 72px;
+        align-items: start;
+      }
+      .atext p {
+        font-size: 15px;
+        line-height: 1.9;
+        color: var(--mu);
+        font-weight: 300;
+        margin-bottom: 20px;
+      }
+      .atext strong {
+        color: var(--w);
+        font-weight: 500;
+      }
+      .atext a {
+        color: var(--bll);
+        transition: color 0.2s;
+      }
+      .atext a:hover {
+        color: var(--cyan);
+      }
+      .itable {
+        border: 1px solid var(--bd);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 18px;
+      }
+      .irow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 11px 18px;
+        border-bottom: 1px solid var(--bd2);
+        font-size: 13px;
+        gap: 16px;
+      }
+      .irow:last-child {
+        border-bottom: none;
+      }
+      .ik {
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--mu);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .iv {
+        color: rgba(236, 240, 255, 0.65);
+        font-weight: 300;
+        text-align: right;
+      }
+      .iv a {
+        color: var(--bll);
+        transition: color 0.2s;
+      }
+      .iv a:hover {
+        color: var(--cyan);
+      }
+      .avpill {
+        color: var(--green);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .avpill::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 5px var(--green);
+        flex-shrink: 0;
+        animation: blink 2s infinite;
+      }
+      .sbar {
+        display: flex;
+        border: 1px solid var(--bd);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .sc {
+        flex: 1;
+        text-align: center;
+        padding: 20px 8px;
+        border-right: 1px solid var(--bd2);
+      }
+      .sc:last-child {
+        border-right: none;
+      }
+      .scn {
+        font-family: var(--fh);
+        font-size: 1.8rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.025em;
+        color: var(--w);
+      }
+      .scn em {
+        color: var(--bll);
+        font-style: normal;
+      }
+      .scl {
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        color: var(--mu);
+        margin-top: 3px;
+      }
+
+      /* ══ PROJECTS — CINEMATIC CARD GRID ══ */
+
+      /* Filter tabs */
+      .pf-tabs {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+      .pf-tab {
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding: 7px 16px;
+        border-radius: 2px;
+        border: 1px solid var(--bd);
+        color: var(--mu);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.22s var(--ease);
+      }
+      .pf-tab:hover {
+        border-color: rgba(77,148,255,0.4);
+        color: var(--w);
+        background: rgba(77,148,255,0.06);
+      }
+      .pf-tab.active {
+        background: var(--blm);
+        border-color: var(--blm);
+        color: var(--w);
+        box-shadow: 0 0 18px rgba(34,114,255,0.35);
+      }
+
+      /* Card grid container */
+      .pcg {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        overflow: visible;
+      }
+      .pcg.cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Individual card */
+      .pcard {
+        position: relative;
+        overflow: hidden;
+        background: var(--bg2);
+        cursor: pointer;
+        transition: transform 0.18s var(--ease), box-shadow 0.3s;
+        transform-style: preserve-3d;
+        will-change: transform;
+        border-radius: 0px;
+        border: none;
+        background: var(--card);
+      }
+      
+      .pcard:hover {
+        box-shadow: 0 0 24px rgba(34, 114, 255, 0.3);
+        transform: translateY(-2px);
+      }
+      
+      /* Project card hover overlay */
+      .pcard::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(6, 9, 15, 0.9), rgba(6, 9, 15, 0.7));
+        opacity: 0;
+        transition: opacity 0.3s var(--ease);
+        z-index: 1;
+        border-radius: 0px;
+      }
+      
+      .pcard:hover::before {
+        opacity: 1;
+      }
+      
+      .pcard-reveal {
+        position: relative;
+        z-index: 2;
+      }
+      
+      .pcard-img {
+        aspect-ratio: 16 / 10;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0px;
+        z-index: 0;
+      }
+      
+      .pcard-info {
+        position: relative;
+        z-index: 2;
+      }
+      .pcard[data-category] {
+        transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+      }
+      .pcard.hidden {
+        display: none;
+      }
+
+      /* Aspect-ratio image frame */
+      
+      .pcard-img .gbg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .pcard-img .ggrid {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-image: radial-gradient(rgba(77,148,255,0.07) 1px, transparent 1px);
+        background-size: 18px 18px;
+      }
+      .pcard-img .pemoji {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.8rem;
+        z-index: 2;
+        transition: transform 0.5s var(--ease), opacity 0.4s;
+      }
+      .pcard-img img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 3;
+        transition: transform 0.6s var(--ease), opacity 0.4s;
+      }
+      /* Gradient overlay — always present, deepens on hover */
+      .pcard-img::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+        background: linear-gradient(
+          to top,
+          rgba(6,9,15,0.95) 0%,
+          rgba(6,9,15,0.5) 35%,
+          rgba(6,9,15,0.1) 65%,
+          transparent 100%
+        );
+        transition: opacity 0.4s var(--ease);
+      }
+      .pcard:hover .pcard-img::after {
+        opacity: 0.6;
+      }
+      .pcard:hover .pcard-img img {
+        transform: scale(1.07);
+      }
+      .pcard:hover .pcard-img .pemoji {
+        transform: scale(1.12);
+        opacity: 0.7;
+      }
+
+      /* Behance badge */
+      .pcard-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 6;
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.06em;
+        background: rgba(6,9,15,0.82);
+        border: 1px solid var(--bd);
+        border-radius: 20px;
+        padding: 3px 10px;
+        color: var(--bll);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: opacity 0.3s;
+      }
+      .pcard:hover .pcard-badge {
+        opacity: 0;
+      }
+
+      /* Category pill — top left */
+      .pcard-cat {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 6;
+        font-family: var(--fm);
+        font-size: 7px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--bll);
+        background: rgba(6,9,15,0.8);
+        border: 1px solid rgba(77,148,255,0.3);
+        border-radius: 2px;
+        padding: 3px 8px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      /* Slide-up info panel */
+      .pcard-info {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 18px;
+        /* resting state: only title visible at bottom */
+      }
+      .pcard-title-wrap {
+        overflow: hidden;
+      }
+      .pcard-num {
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.2em;
+        color: var(--mu2);
+        margin-bottom: 4px;
+        transform: translateY(0);
+        transition: transform 0.4s var(--ease), opacity 0.3s;
+      }
+      .pcard-title {
+        font-family: var(--fh);
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        color: var(--w);
+        margin-bottom: 0;
+        transform: translateY(0);
+        transition: transform 0.38s var(--ease);
+      }
+
+      /* The expandable reveal section */
+      .pcard-reveal {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition:
+          max-height 0.45s var(--ease),
+          opacity 0.35s var(--ease);
+        margin-top: 0;
+      }
+      .pcard:hover .pcard-reveal {
+        max-height: 200px;
+        opacity: 1;
+        margin-top: 10px;
+      }
+      .pcard-desc {
+        font-size: 11px;
+        line-height: 1.65;
+        color: rgba(180,200,240,0.65);
+        font-weight: 300;
+        margin-bottom: 10px;
+      }
+      .pcard-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 12px;
+      }
+      .pcard-tag {
+        font-family: var(--fm);
+        font-size: 7px;
+        letter-spacing: 0.08em;
+        color: var(--mu2);
+        border: 1px solid var(--bd2);
+        padding: 2px 7px;
+        border-radius: 2px;
+      }
+      .pcard-actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .pcard-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 6px 12px;
+        border-radius: 2px;
+        border: 1px solid;
+        transition: all 0.2s;
+        cursor: pointer;
+        white-space: nowrap;
+        background: transparent;
+      }
+      .pcard-btn.primary {
+        border-color: rgba(77,148,255,0.5);
+        color: var(--bll);
+        background: rgba(0,85,238,0.15);
+      }
+      .pcard-btn.primary:hover {
+        background: var(--blm);
+        border-color: var(--blm);
+        color: var(--w);
+        box-shadow: 0 4px 16px rgba(34,114,255,0.4);
+      }
+      .pcard-btn.ghost {
+        border-color: var(--bd);
+        color: var(--mu);
+      }
+      .pcard-btn.ghost:hover {
+        border-color: rgba(77,148,255,0.35);
+        color: var(--w);
+        background: rgba(77,148,255,0.06);
+      }
+      .pcard-btn svg {
+        width: 10px;
+        height: 10px;
+        flex-shrink: 0;
+      }
+
+      /* Metrics chips for case studies */
+      .pcard-metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 8px;
+      }
+      .pcard-metric {
+        font-family: var(--fm);
+        font-size: 7.5px;
+        letter-spacing: 0.06em;
+        color: var(--bll);
+        border: 1px solid rgba(77,148,255,0.25);
+        padding: 2px 8px;
+        border-radius: 20px;
+        background: rgba(0,85,238,0.08);
+      }
+
+      /* Tier label (section header) */
+      .ptier {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--mu2);
+        margin: 48px 0 10px;
+      }
+      .ptier:first-of-type {
+        margin-top: 0;
+      }
+      .ptier::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--bd2);
+      }
+      .ptier-num {
+        color: var(--bll);
+        opacity: 0.6;
+      }
+
+      /* "View all on Behance" CTA row */
+      .pmore {
+        text-align: center;
+        margin-top: 48px;
+      }
+
+
+            /* ══ IMPACT ══ */
+      .iband {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3px;
+        background: var(--bd2);
+        border: 1px solid var(--bd2);
+      }
+      .icell {
+        background: var(--bg2);
+        padding: 42px 28px;
+        text-align: center;
+      }
+      .icn {
+        font-family: var(--fh);
+        font-size: clamp(2.2rem, 3.5vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        margin-bottom: 6px;
+        color: var(--w);
+      }
+      .icn em {
+        color: var(--bll);
+        font-style: normal;
+      }
+      .icl {
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--mu);
+      }
+
+      /* ══ EXPERIENCE ══ */
+      .eitem {
+        display: grid;
+        grid-template-columns: 190px 1fr;
+        gap: 44px;
+        padding: 40px 0;
+        border-top: 1px solid var(--bd2);
+        opacity: 0;
+        transform: translateX(-18px);
+        transition:
+          opacity 0.6s var(--ease),
+          transform 0.6s var(--ease);
+      }
+      .eitem:last-child {
+        border-bottom: 1px solid var(--bd2);
+      }
+      .eitem.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .elogo {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        border: 1px solid var(--bd);
+        background: rgba(0, 85, 238, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--fh);
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--bll);
+        margin-bottom: 12px;
+        letter-spacing: 0.02em;
+      }
+      .eperiod {
+        font-family: var(--fm);
+        font-size: 10px;
+        color: var(--mu);
+        letter-spacing: 0.04em;
+        line-height: 1.7;
+      }
+      .etype {
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--mu2);
+        margin-top: 3px;
+      }
+      .eloc {
+        font-family: var(--fm);
+        font-size: 8px;
+        color: var(--mu2);
+        margin-top: 2px;
+      }
+      .erole {
+        font-family: var(--fh);
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        margin-bottom: 3px;
+        line-height: 1.2;
+      }
+      .eco {
+        font-size: 13px;
+        color: var(--bll);
+        font-weight: 400;
+        margin-bottom: 16px;
+      }
+      .ebuls {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .ebuls li {
+        font-size: 13px;
+        color: var(--mu);
+        line-height: 1.7;
+        padding-left: 18px;
+        position: relative;
+        font-weight: 300;
+      }
+      .ebuls li::before {
+        content: "—";
+        position: absolute;
+        left: 0;
+        color: var(--bd);
+        font-size: 10px;
+        top: 4px;
+      }
+
+      /* ══ SKILLS ══ */
+      .sgrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3px;
+        background: var(--bd2);
+        border: 1px solid var(--bd2);
+      }
+      .sg {
+        background: var(--bg2);
+        padding: 30px 28px;
+      }
+      .sgt {
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--mu);
+        margin-bottom: 16px;
+      }
+      .sgtags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .stk {
+        font-size: 12px;
+        font-weight: 300;
+        color: rgba(236, 240, 255, 0.55);
+        border: 1px solid var(--bd2);
+        padding: 5px 12px;
+        border-radius: 2px;
+        transition: all 0.2s;
+        cursor: default;
+      }
+      .stk:hover,
+      .stk.hi {
+        border-color: rgba(77, 148, 255, 0.35);
+        color: var(--w);
+        background: rgba(77, 148, 255, 0.05);
+      }
+
+      /* ══ EDUCATION ══ */
+      .egrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3px;
+        background: var(--bd2);
+        border: 1px solid var(--bd2);
+      }
+      .edc {
+        background: var(--bg);
+        padding: 26px 28px;
+      }
+      .edyr {
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--mu2);
+        margin-bottom: 6px;
+      }
+      .edtitle {
+        font-family: var(--fh);
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin-bottom: 3px;
+        line-height: 1.3;
+      }
+      .edorg {
+        font-size: 12px;
+        color: var(--mu);
+        font-weight: 300;
+      }
+
+      /* ══ CONTACT ══ */
+      .cgrid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 72px;
+        align-items: start;
+      }
+      .cbig {
+        font-family: var(--fh);
+        font-size: clamp(2.6rem, 4.5vw, 4.6rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        margin-bottom: 22px;
+      }
+      .cbig em {
+        font-style: italic;
+        color: var(--bll);
+      }
+      .csub {
+        font-size: 15px;
+        line-height: 1.85;
+        color: var(--mu);
+        font-weight: 300;
+        margin-bottom: 36px;
+      }
+      .clinks {
+        border: 1px solid var(--bd);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .clink {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--bd2);
+        color: var(--mu);
+        font-size: 13px;
+        font-weight: 300;
+        transition:
+          color 0.2s,
+          padding-left 0.25s var(--ease),
+          background 0.2s;
+      }
+      .clink:last-child {
+        border-bottom: none;
+      }
+      .clink:hover {
+        color: var(--w);
+        padding-left: 28px;
+        background: rgba(77, 148, 255, 0.04);
+      }
+      .clk {
+        font-family: var(--fm);
+        font-size: 8px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--mu2);
+        white-space: nowrap;
+      }
+      .rbox {
+        margin-top: 16px;
+        padding: 14px 18px;
+        border: 1px solid var(--bd);
+        border-radius: 4px;
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        color: var(--mu2);
+        line-height: 1.7;
+      }
+
+      /* ══ FOOTER ══ */
+      footer {
+        padding: 26px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--bd2);
+      }
+      .flogo {
+        font-family: var(--fh);
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+      .flogo em {
+        font-style: normal;
+        color: var(--bll);
+      }
+      .fcopy {
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        color: var(--mu2);
+      }
+      .flinks {
+        display: flex;
+        gap: 20px;
+      }
+      .flinks a {
+        font-family: var(--fm);
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        color: var(--mu2);
+        transition: color 0.2s;
+      }
+      .flinks a:hover {
+        color: var(--bll);
+      }
+
+      /* ══ FIGMA MODAL ══ */
+      #figma-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(6, 9, 15, 0.85);
+        backdrop-filter: blur(8px);
+        opacity: 0;
+        transition: opacity 0.3s var(--ease);
+      }
+      
+      #figma-modal.open {
+        display: flex;
+        opacity: 1;
+      }
+      
+      .fm-inner {
+        width: 90vw;
+        max-width: 1200px;
+        height: 85vh;
+        background: var(--bg2);
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+      
+      .fm-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--bd2);
+        background: var(--bg3);
+      }
+      
+      .fm-title {
+        font-family: var(--fh);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--w);
+      }
+      
+      .fm-subtitle {
+        font-family: var(--fm);
+        font-size: 0.8rem;
+        color: var(--mu);
+        margin-top: 2px;
+      }
+      
+      .fm-actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      
+      .fm-openbtn {
+        font-family: var(--fm);
+        font-size: 0.75rem;
+        color: var(--bll);
+        background: transparent;
+        border: 1px solid var(--bd);
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s var(--ease);
+      }
+      
+      .fm-openbtn:hover {
+        border-color: var(--blm);
+        color: var(--w);
+        background: rgba(77, 148, 255, 0.1);
+      }
+      
+      .fm-close {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: var(--bg);
+        color: var(--mu);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s var(--ease);
+      }
+      
+      .fm-close:hover {
+        background: var(--blm);
+        color: var(--w);
+      }
+      
+      .fm-body {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .fm-loading {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 16px;
+        background: var(--bg2);
+        color: var(--mu);
+        font-family: var(--fm);
+        font-size: 0.9rem;
+      }
+      
+      .fm-spinner {
+        width: 32px;
+        height: 32px;
+        border: 2px solid var(--bd2);
+        border-top-color: var(--blm);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      #fm-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: white;
+      }
+
+      /* ══ RESPONSIVE ══ */
+      @media (max-width: 900px) {
+        .hcol-left {
+          padding: 0 30px;
+          min-height: auto;
+          padding-top: 100px;
+          padding-bottom: 60px;
+        }
+        .shint {
+          bottom: 60px;
+          left: 30px;
+        }
+      }
+      @media (max-width: 960px) {
+        nav {
+          padding: 18px 24px;
+        }
+        .nlinks {
+          display: none;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          padding: 100px 24px 70px;
+        }
+        .hcol-right {
+          display: none;
+        }
+        .hcol-left {
+          padding: 0;
+        }
+        .shint {
+          left: 24px;
+        }
+        .sec {
+          padding: 70px 24px;
+        }
+        .agrid,
+        .cgrid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        /* New project card grid — single column on tablet */
+        .pcg {
+          grid-template-columns: 1fr 1fr;
+        }
+        .pcg.cols-2 {
+          grid-template-columns: 1fr;
+        }
+        .iband {
+          grid-template-columns: 1fr 1fr;
+        }
+        .sgrid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .egrid {
+          grid-template-columns: 1fr;
+        }
+        .eitem {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        footer {
+          flex-direction: column;
+          gap: 12px;
+          padding: 22px;
+          text-align: center;
+        }
+        .fm-inner {
+          width: 95vw;
+          height: 85vh;
+        }
+      }
+      @media (max-width: 600px) {
+        .sgrid,
+        .iband {
+          grid-template-columns: 1fr;
+        }
+        .pcg,
+        .pcg.cols-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <div id="cur"></div>
+    <div id="cr"></div>
+
+    <!-- ── FIGMA EMBED MODAL ── -->
+    <div id="figma-modal">
+      <div class="fm-inner">
+        <div class="fm-head">
+          <div>
+            <div class="fm-title" id="fm-title">Figma Preview</div>
+            <div class="fm-subtitle" id="fm-subtitle">
+              Interactive Prototype
+            </div>
+          </div>
+          <div class="fm-actions">
+            <button class="fm-openbtn" id="fm-openbtn" onclick="openFigmaTab()">
+              Open in Figma ↗
+            </button>
+            <button class="fm-close" onclick="closeFigmaModal()" title="Close">
+              ✕
+            </button>
+          </div>
+        </div>
+        <div class="fm-body">
+          <div class="fm-loading" id="fm-loading">
+            <div class="fm-spinner"></div>
+            Loading Figma preview…
+          </div>
+          <iframe
+            id="fm-iframe"
+            src=""
+            allowfullscreen
+            onload="
+              document.getElementById('fm-loading').style.display = 'none'
+            "
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── NAV ── -->
+    <nav id="nav" role="navigation" aria-label="Main navigation">
+      <a href="#home" class="nlogo" aria-label="Mohammad Hamwi - Home">Mohammad<span>.</span></a>
+      <ul class="nlinks" role="menubar">
+        <li><a href="#about" role="menuitem">About</a></li>
+        <li><a href="#work" role="menuitem">Work</a></li>
+        <li><a href="#experience" role="menuitem">Experience</a></li>
+        <li><a href="#skills" role="menuitem">Skills</a></li>
+        <li><a href="#contact" role="menuitem">Contact</a></li>
+      </ul>
+      <a href="https://wa.me/963988594320" target="_blank" class="ncta" aria-label="Contact for hire on WhatsApp">Hire Me</a>
+    </nav>
+
+    <!-- ══════════ HERO ══════════ -->
+    <section class="hero" id="home" role="banner" aria-labelledby="hero-heading">
+      <canvas id="cv" aria-hidden="true"></canvas>
+      <div class="hgrid" aria-hidden="true"></div>
+      <div class="hvign" aria-hidden="true"></div>
+      <div class="glw gl1" aria-hidden="true"></div>
+      <div class="glw gl2" aria-hidden="true"></div>
+
+      <!-- LEFT: text content -->
+      <div class="hcol-left">
+        <div class="hbadge" role="status" aria-live="polite">
+          <div class="hbdot" aria-hidden="true"></div>
+          Damascus, Syria — Open to Remote Worldwide
+        </div>
+        <h1 class="hh" id="hero-heading">
+          <span class="hl">I Design</span>
+          <span class="hcw" aria-label="Rotating words: Digital Experiences, Mobile Products, UI Systems, Brand Identities, User Journeys">
+            <span class="cw on" aria-hidden="true">Digital Experiences</span>
+            <span class="cw" aria-hidden="true">Mobile Products</span>
+            <span class="cw" aria-hidden="true">UI Systems</span>
+            <span class="cw" aria-hidden="true">Brand Identities</span>
+            <span class="cw" aria-hidden="true">User Journeys</span>
+          </span>
+          <span class="hend">that move people.</span>
+        </h1>
+        <p class="hdesc">
+          UI/UX &amp; Product Designer · 5+ years across apps, dashboards,
+          websites &amp; brand systems. From user research to high-fidelity
+          prototype to code. 7 companies in 4 countries.
+        </p>
+        <div class="hacts">
+          <a href="#work" class="btn-p" aria-label="View case studies">View Case Studies →</a>
+          <a href="https://www.be.net/hamwisign" target="_blank" class="btn-o" aria-label="View Behance portfolio">
+            <svg
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              style="width: 14px; height: 14px"
+              aria-hidden="true"
+            >
+              <path
+                d="M6.5 5.5h7a2 2 0 010 4H6.5V5.5zm0 5.5h7.5a2.5 2.5 0 010 5H6.5V11z"
+              />
+              <circle cx="7" cy="7.5" r="1" />
+            </svg>
+            Behance ↗
+          </a>
+        </div>
+        <div class="shint">
+          <div class="shl"></div>
+          Scroll to explore
+        </div>
+      </div>
+
+      <!-- RIGHT: floating widgets contained -->
+      <div class="hcol-right">
+        <svg width="0" height="0" style="position: absolute">
+          <defs>
+            <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#2272FF" />
+              <stop offset="100%" stop-color="#00C8F0" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="wstage">
+          <!-- Identity card -->
+          <div class="fw fw-id">
+            <div class="wc">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                  margin-bottom: 10px;
+                "
+              >
+                <div class="wav">MH</div>
+                <div>
+                  <div class="wn">Mohammad Hamwi</div>
+                  <div class="wr">UI/UX Designer</div>
+                </div>
+              </div>
+              <div class="wms">
+                <div class="wms-item">
+                  <div class="wms-n">25<em>+</em></div>
+                  <div class="wms-l">Projects</div>
+                </div>
+                <div class="wms-item">
+                  <div class="wms-n">5<em>+</em></div>
+                  <div class="wms-l">Years</div>
+                </div>
+                <div class="wms-item">
+                  <div class="wms-n">7</div>
+                  <div class="wms-l">Companies</div>
+                </div>
+              </div>
+              <div class="wavl">Available for Projects</div>
+            </div>
+          </div>
+
+          <!-- Activity -->
+          <div class="fw fw-act">
+            <div class="wc">
+              <div class="wah">
+                <div class="waht">Recent Activity</div>
+                <div class="wahlv">● LIVE</div>
+              </div>
+              <div class="war">
+                <div class="wai" style="background: rgba(0, 85, 238, 0.15)">
+                  🎨
+                </div>
+                <div class="wat"><strong>Wavez</strong> design published</div>
+                <div class="watm">2m</div>
+              </div>
+              <div class="war">
+                <div class="wai" style="background: rgba(0, 200, 240, 0.1)">
+                  📱
+                </div>
+                <div class="wat"><strong>Jahez</strong> prototype approved</div>
+                <div class="watm">1h</div>
+              </div>
+              <div class="war">
+                <div class="wai" style="background: rgba(34, 209, 106, 0.1)">
+                  ✅
+                </div>
+                <div class="wat">UX audit delivered</div>
+                <div class="watm">3h</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Process -->
+          <div class="fw fw-proc">
+            <div class="wc">
+              <div class="wlbl">Design Process</div>
+              <div class="wsp done">
+                <div class="wdot"></div>
+                Research
+              </div>
+              <div class="wsp done">
+                <div class="wdot"></div>
+                Wireframes
+              </div>
+              <div class="wsp now">
+                <div class="wdot"></div>
+                UI Design
+              </div>
+              <div class="wsp">
+                <div class="wdot"></div>
+                Prototype
+              </div>
+              <div class="wsp">
+                <div class="wdot"></div>
+                Dev Handoff
+              </div>
+              <div class="wpb"><div class="wpbf"></div></div>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="fw fw-stat">
+            <div class="wc">
+              <div>
+                <div class="wsn">+<em id="c1">0</em>%</div>
+                <div class="wsl">User Satisfaction</div>
+              </div>
+              <div class="wsd"></div>
+              <div>
+                <div class="wsn">+<em id="c2">0</em>%</div>
+                <div class="wsl">Brand Visibility</div>
+              </div>
+              <div class="wsd"></div>
+              <div>
+                <div class="wsn"><em id="c3">0</em>K</div>
+                <div class="wsl">Behance Views</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Satisfaction ring -->
+          <div class="fw fw-ring">
+            <div class="wc">
+              <div class="wrw">
+                <svg class="wrsvg" viewBox="0 0 76 76">
+                  <circle class="wrt" cx="38" cy="38" r="33" />
+                  <circle class="wrp" cx="38" cy="38" r="33" />
+                </svg>
+                <div class="wrpct">85%</div>
+              </div>
+              <div class="wrlbl">Client Satisfaction</div>
+            </div>
+          </div>
+
+          <!-- Tools -->
+          <div class="fw fw-tool">
+            <div class="wc">
+              <div class="wlbl">Stack</div>
+              <div class="wttags">
+                <span class="wttag on">Figma</span
+                ><span class="wttag on">AE</span>
+                <span class="wttag">Illustrator</span
+                ><span class="wttag">Webflow</span>
+                <span class="wttag on">React</span
+                ><span class="wttag">Framer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════ ABOUT ══════════ -->
+    <main id="main">
+    <section class="sec" id="about" aria-labelledby="about-heading">
+      <div class="stag">About</div>
+      <h2 class="sh" id="about-heading">
+        Hello, I'm Mohammad<br />a UI/UX Designer based in <em>Damascus.</em>
+      </h2>
+      <div class="agrid">
+        <div class="atext rv">
+          <p>
+            With over <strong>5 years of experience</strong>, I design at the
+            intersection of craft and strategy — creating UI systems,
+            interaction flows, and digital products that are as thoughtful as
+            they are functional. I've worked remotely with companies across
+            <strong>Saudi Arabia, Turkey, UAE, Syria, and Germany.</strong>
+          </p>
+          <p>
+            My background spans the full design spectrum: UX research, product
+            design, motion graphics, brand identity, and front-end development.
+            This means I understand how design decisions ripple from a wireframe
+            to deployed code — and I care deeply about every step.
+          </p>
+          <p>
+            Currently open to
+            <strong>freelance projects and full-time roles</strong> worldwide.
+            Senior-level thinking, agency speed, bias toward outcomes.
+          </p>
+          <br />
+          <a href="https://www.be.net/hamwisign" target="_blank"
+            >View full portfolio on Behance ↗</a
+          >
+        </div>
+        <div class="rv d1">
+          <div class="itable">
+            <div class="irow">
+              <span class="ik">Location</span
+              ><span class="iv">Damascus, Syria — Remote</span>
+            </div>
+            <div class="irow">
+              <span class="ik">Email</span
+              ><span class="iv"><a href="mailto:hamwisign@gmail.com">hamwisign@gmail.com</a></span
+              >
+            </div>
+            <div class="irow">
+              <span class="ik">Phone / WA</span
+              ><span class="iv">+963 988 594 320</span>
+            </div>
+            <div class="irow">
+              <span class="ik">Languages</span
+              ><span class="iv">Arabic (Native) · English (B2)</span>
+            </div>
+            <div class="irow">
+              <span class="ik">Status</span
+              ><span class="iv"
+                ><span class="avpill">Open — Freelance &amp; FT</span></span
+              >
+            </div>
+            <div class="irow">
+              <span class="ik">Behance</span
+              ><span class="iv"
+                ><a href="https://www.be.net/hamwisign" target="_blank"
+                  >hamwisign ↗</a
+                ></span
+              >
+            </div>
+            <div class="irow">
+              <span class="ik">LinkedIn</span
+              ><span class="iv"
+                ><a
+                  href="https://linkedin.com/in/mohammad-hamwi"
+                  target="_blank"
+                  >mohammad-hamwi ↗</a
+                ></span
+              >
+            </div>
+            <div class="irow">
+              <span class="ik">GitHub</span
+              ><span class="iv"
+                ><a href="https://github.com/MHamwi" target="_blank"
+                  >MHamwi ↗</a
+                ></span
+              >
+            </div>
+          </div>
+          <div class="sbar">
+            <div class="sc">
+              <div class="scn">5<em>+</em></div>
+              <div class="scl">Years</div>
+            </div>
+            <div class="sc">
+              <div class="scn">25<em>+</em></div>
+              <div class="scl">Projects</div>
+            </div>
+            <div class="sc">
+              <div class="scn">15<em>K</em></div>
+              <div class="scl">Views</div>
+            </div>
+            <div class="sc">
+              <div class="scn">885</div>
+              <div class="scl">Likes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══════════ WORK ══════════ -->
+    <section class="sec alt" id="work" aria-labelledby="work-heading">
+      <div class="stag">Selected Work</div>
+      <h2 class="sh rv" id="work-heading">Case Studies &amp; <em>Projects</em></h2>
+
+      <!-- Filter Tabs -->
+      <div class="pf-tabs rv" role="tablist" aria-label="Filter projects by category">
+        <button class="pf-tab active" data-filter="all" role="tab" aria-selected="true" aria-controls="tier1 tier2 tier3 tier4">All Work</button>
+        <button class="pf-tab" data-filter="case-study" role="tab" aria-selected="false" aria-controls="tier1">Case Studies</button>
+        <button class="pf-tab" data-filter="dashboard" role="tab" aria-selected="false" aria-controls="tier2">Dashboards</button>
+        <button class="pf-tab" data-filter="web" role="tab" aria-selected="false" aria-controls="tier3">Websites</button>
+        <button class="pf-tab" data-filter="brand" role="tab" aria-selected="false" aria-controls="tier4">Brand &amp; Visual</button>
+      </div>
+
+      <!-- 01 — Flagship Case Studies -->
+      <div class="ptier rv" aria-hidden="true"><span class="ptier-num">01</span> Flagship UX Case Studies</div>
+      <div class="pcg cols-2 rv" id="tier1" role="tabpanel" aria-labelledby="all-work">
+        <div class="pcard rv" data-category="case-study" role="article" aria-labelledby="project-1-title">
+          <div class="pcard-img">
+            <div class="gbg" style="background:linear-gradient(135deg,#060c1a,#0f1a38)" aria-hidden="true"></div>
+            <div class="ggrid" aria-hidden="true"></div>
+            <div class="pemoji" aria-hidden="true">🍔</div>
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/68cb41209730403.67058f000bbb1.png" alt="JAHEZ App UX/UI Redesign" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="pcard-cat" aria-hidden="true">UX Research · Redesign</div>
+            <div class="pcard-badge" aria-hidden="true">★ 397 · 8.3K views</div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num" aria-hidden="true">01 · Case Study</div>
+              <div class="pcard-title" id="project-1-title">JAHEZ — Group Orders</div>
+            </div>
+            <div class="pcard-reveal">
+              <div class="pcard-metrics"><span class="pcard-metric">+25% Satisfaction</span><span class="pcard-metric">8.3K Behance Views</span><span class="pcard-metric">397 Appreciations</span></div>
+              <div class="pcard-desc">Full UX research cycle — user interviews, FigJam journey mapping, usability testing — leading to a complete UI redesign of the group orders feature.</div>
+              <div class="pcard-tags"><span class="pcard-tag">UX Research</span><span class="pcard-tag">Journey Mapping</span><span class="pcard-tag">UI Design</span><span class="pcard-tag">Figma</span><span class="pcard-tag">FigJam</span></div>
+              <div class="pcard-actions"><a class="pcard-btn primary" href="https://www.behance.net/gallery/209730403/JAHEZ-App-UXUI-Redesign-Case-Study-Group-Orders" target="_blank"><svg viewBox="0 0 20 16" fill="currentColor" style="width:10px;height:10px;flex-shrink:0"><path d="M0 0h8.5C10.43 0 12 1.57 12 3.5S10.43 7 8.5 7H0V0zm0 9h9.5C11.98 9 14 11.02 14 13.5S11.98 18 9.5 18H0V9z"/><rect x="13" y="0" width="7" height="2" rx="1"/><path d="M13 5h7v2h-7z"/></svg>Behance</a><button class="pcard-btn ghost" onclick="openFigma('https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2Fi9HzCA5RHv56DPNHtos1Ka%2FJahez-v1.1','JAHEZ UI Design','Figma Design File')"><svg viewBox="0 0 38 57" fill="none" style="width:10px;height:10px;flex-shrink:0"><path d="M19 28.5a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 019.5 38H19v9.5a9.5 9.5 0 01-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 000-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 009.5 19H19V0H9.5A9.5 9.5 0 000 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 009.5 38H19V19H9.5A9.5 9.5 0 000 28.5z" fill="#A259FF"/></svg>Preview</button><a class="pcard-btn ghost" href="https://www.figma.com/board/1BHBLIHVNpJ6wJwmBrkCW6/Jahez-Users--Research" target="_blank"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" style="width:9px;height:9px;flex-shrink:0"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>Research Board</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="case-study">
+          <div class="pcard-img">
+            <div class="gbg" style="background:linear-gradient(135deg,#0e0820,#1a1038)"></div>
+            <div class="ggrid"></div>
+            <div class="pemoji">🛒</div>
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/6770f0165979759.Y3JvcCwxNTM0LDEyMDAsMzQsMA.jpg" alt="Etloob" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="pcard-cat">Mobile App · E-Commerce</div>
+            <div class="pcard-badge">9 likes · 189 views</div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">02 · Case Study</div>
+              <div class="pcard-title">Etloob — App Redesign</div>
+            </div>
+            <div class="pcard-reveal">
+              <div class="pcard-metrics"><span class="pcard-metric">+25% UX</span><span class="pcard-metric">+30% Brand</span><span class="pcard-metric">+18% Sales</span></div>
+              <div class="pcard-desc">End-to-end redesign of the Etloob delivery app — UX audit to component system. Triple-metric impact across satisfaction, brand, and revenue.</div>
+              <div class="pcard-tags"><span class="pcard-tag">UI/UX</span><span class="pcard-tag">E-Commerce</span><span class="pcard-tag">Design System</span><span class="pcard-tag">Brand Design</span></div>
+              <div class="pcard-actions"><a class="pcard-btn primary" href="https://www.behance.net/gallery/165979759/UIUX-Case-Study-for-E-Commerce-App" target="_blank"><svg viewBox="0 0 20 16" fill="currentColor" style="width:10px;height:10px;flex-shrink:0"><path d="M0 0h8.5C10.43 0 12 1.57 12 3.5S10.43 7 8.5 7H0V0zm0 9h9.5C11.98 9 14 11.02 14 13.5S11.98 18 9.5 18H0V9z"/><rect x="13" y="0" width="7" height="2" rx="1"/><path d="M13 5h7v2h-7z"/></svg>Behance</a><button class="pcard-btn ghost" onclick="openFigma('https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2F0ktsOQTyZhr8uSNhs4qfkh%2FEtloob-V1.1','Etloob App','UI Design File')"><svg viewBox="0 0 38 57" fill="none" style="width:10px;height:10px;flex-shrink:0"><path d="M19 28.5a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 019.5 38H19v9.5a9.5 9.5 0 01-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 000-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 009.5 19H19V0H9.5A9.5 9.5 0 000 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 009.5 38H19V19H9.5A9.5 9.5 0 000 28.5z" fill="#A259FF"/></svg>Preview</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 — Enterprise Dashboards -->
+      <div class="ptier rv"><span class="ptier-num">02</span> Enterprise Platforms &amp; Dashboards</div>
+      <div class="pcg rv" id="tier2">
+        <div class="pcard rv" data-category="dashboard">
+          <div class="pcard-img">
+            <div class="gbg" style="background:linear-gradient(135deg,#07100a,#0f2018)"></div>
+            <div class="ggrid"></div>
+            <div class="pemoji">⚙️</div>
+            
+            <div class="pcard-cat">Enterprise Dashboard · SaaS</div>
+            
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">03</div>
+              <div class="pcard-title">Yafe Integration Platform</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Complex enterprise dashboard — multi-role flows, data visualization, scalable design system for a B2B integration tool.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Dashboard</span><span class="pcard-tag">Enterprise</span><span class="pcard-tag">SaaS</span></div>
+              <div class="pcard-actions"><button class="pcard-btn ghost" onclick="openFigma('https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FedpYcIeSbkYxbcbQ2Hjjdx%2FYafe-Integration-Platform%3Fnode-id%3D121-7437','Yafe Integration Platform','Enterprise Dashboard')"><svg viewBox="0 0 38 57" fill="none" style="width:10px;height:10px;flex-shrink:0"><path d="M19 28.5a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 019.5 38H19v9.5a9.5 9.5 0 01-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 000-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 009.5 19H19V0H9.5A9.5 9.5 0 000 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 009.5 38H19V19H9.5A9.5 9.5 0 000 28.5z" fill="#A259FF"/></svg>Preview</button><a class="pcard-btn ghost" href="https://www.figma.com/design/edpYcIeSbkYxbcbQ2Hjjdx/Yafe-Integration-Platform?node-id=121-7437" target="_blank"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" style="width:9px;height:9px;flex-shrink:0"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>Figma ↗</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="dashboard">
+          <div class="pcard-img">
+            <div class="gbg" style="background:linear-gradient(135deg,#120a07,#241408)"></div>
+            <div class="ggrid"></div>
+            <div class="pemoji">🕌</div>
+            
+            <div class="pcard-cat">Platform Module · App</div>
+            
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">04</div>
+              <div class="pcard-title">Nusuk Platform</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Manifest module for a pilgrimage services platform — culturally informed UX with modern interaction patterns and full mobile specs.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Platform</span><span class="pcard-tag">Cultural UX</span><span class="pcard-tag">Mobile</span></div>
+              <div class="pcard-actions"><button class="pcard-btn ghost" onclick="openFigma('https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FpMeHMGK6avgvFVlPkleeUy%2FNusuk---Manifest-Module--Copy-','Nusuk Platform','Module Design')"><svg viewBox="0 0 38 57" fill="none" style="width:10px;height:10px;flex-shrink:0"><path d="M19 28.5a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 019.5 38H19v9.5a9.5 9.5 0 01-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 000-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 009.5 19H19V0H9.5A9.5 9.5 0 000 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 009.5 38H19V19H9.5A9.5 9.5 0 000 28.5z" fill="#A259FF"/></svg>Preview</button><a class="pcard-btn ghost" href="https://www.figma.com/design/pMeHMGK6avgvFVlPkleeUy/Nusuk---Manifest-Module--Copy-" target="_blank"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" style="width:9px;height:9px;flex-shrink:0"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>Figma ↗</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="dashboard">
+          <div class="pcard-img">
+            <div class="gbg" style="background:linear-gradient(135deg,#0a0d12,#141b28)"></div>
+            <div class="ggrid"></div>
+            <div class="pemoji">🍽️</div>
+            
+            <div class="pcard-cat">Dashboard · F&B Analytics</div>
+            
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">05</div>
+              <div class="pcard-title">Al Romansiah Dashboard</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Restaurant chain management dashboard — real-time analytics, order tracking, and multi-branch staff management modules.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Dashboard</span><span class="pcard-tag">Analytics</span><span class="pcard-tag">F&B</span></div>
+              <div class="pcard-actions"><button class="pcard-btn ghost" onclick="openFigma('https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FfT4n4WpvIY1H0f54bJ9454%2FAlromansiah-Dashboard--Copy-%3Fnode-id%3D2187-24879','Al Romansiah Dashboard','Dashboard Design')"><svg viewBox="0 0 38 57" fill="none" style="width:10px;height:10px;flex-shrink:0"><path d="M19 28.5a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 019.5 38H19v9.5a9.5 9.5 0 01-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 000-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 009.5 19H19V0H9.5A9.5 9.5 0 000 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 009.5 38H19V19H9.5A9.5 9.5 0 000 28.5z" fill="#A259FF"/></svg>Preview</button><a class="pcard-btn ghost" href="https://www.figma.com/design/fT4n4WpvIY1H0f54bJ9454/Alromansiah-Dashboard--Copy-?node-id=2187-24879" target="_blank"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" style="width:9px;height:9px;flex-shrink:0"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>Figma ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 — Websites -->
+      <div class="ptier rv"><span class="ptier-num">03</span> Websites &amp; Landing Pages</div>
+      <div class="pcg rv" id="tier3">
+        <div class="pcard rv" data-category="web">
+          <div class="pcard-img">
+            <div class="gbg" style="background:linear-gradient(135deg,#070d18,#0d1a2e)"></div>
+            <div class="ggrid"></div>
+            <div class="pemoji">🌊</div>
+            
+            <div class="pcard-cat">Web Design · Responsive</div>
+            
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">06</div>
+              <div class="pcard-title">Wavez Website</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Full responsive website — design system, interactive desktop + mobile prototype. Clean visual language for a modern brand.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Landing Page</span><span class="pcard-tag">Responsive</span><span class="pcard-tag">Prototype</span></div>
+              <div class="pcard-actions"><button class="pcard-btn ghost" onclick="openFigma('https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F6PIDAgfOG6y2HR7yY9rQjJ%2FMain-Website%3Fnode-id%3D86-1237','Wavez Website','Desktop Prototype')"><svg viewBox="0 0 38 57" fill="none" style="width:10px;height:10px;flex-shrink:0"><path d="M19 28.5a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 019.5 38H19v9.5a9.5 9.5 0 01-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 000-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 009.5 19H19V0H9.5A9.5 9.5 0 000 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 009.5 38H19V19H9.5A9.5 9.5 0 000 28.5z" fill="#A259FF"/></svg>Preview</button><a class="pcard-btn ghost" href="https://www.figma.com/proto/6PIDAgfOG6y2HR7yY9rQjJ/Main-Website?node-id=86-1237&starting-point-node-id=86%3A1410" target="_blank"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" style="width:9px;height:9px;flex-shrink:0"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>Mobile ↗</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="web">
+          <div class="pcard-img">
+            <div class="gbg" style="background:linear-gradient(135deg,#10100a,#1e1e0f)"></div>
+            <div class="ggrid"></div>
+            <div class="pemoji">🏗️</div>
+            
+            <div class="pcard-cat">Corporate Web Design</div>
+            
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">07</div>
+              <div class="pcard-title">Khiami CO — Website</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Corporate website for a contracting company — full desktop and mobile with content architecture and refined visual system.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Corporate</span><span class="pcard-tag">Responsive</span></div>
+              <div class="pcard-actions"><button class="pcard-btn ghost" onclick="openFigma('https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FeAQ0r6ulDl0iRWIXNR60uM%2FKhiami-Co%3Fnode-id%3D214-5383','Khiami CO','Desktop Website')"><svg viewBox="0 0 38 57" fill="none" style="width:10px;height:10px;flex-shrink:0"><path d="M19 28.5a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 019.5 38H19v9.5a9.5 9.5 0 01-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 000-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 009.5 19H19V0H9.5A9.5 9.5 0 000 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 009.5 38H19V19H9.5A9.5 9.5 0 000 28.5z" fill="#A259FF"/></svg>Preview</button><a class="pcard-btn ghost" href="https://www.figma.com/proto/eAQ0r6ulDl0iRWIXNR60uM/Khiami-Co?node-id=570-13795" target="_blank"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" style="width:9px;height:9px;flex-shrink:0"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>Mobile ↗</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="web">
+          <div class="pcard-img">
+            <div class="gbg" style="background:linear-gradient(135deg,#080d10,#0e1a20)"></div>
+            <div class="ggrid"></div>
+            <div class="pemoji">📈</div>
+            
+            <div class="pcard-cat">Landing Page · SaaS</div>
+            
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">08</div>
+              <div class="pcard-title">Easy Growth</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">SaaS landing page — desktop and mobile. High-conversion layout with strong CTAs and data-informed structure.</div>
+              <div class="pcard-tags"><span class="pcard-tag">SaaS</span><span class="pcard-tag">Landing Page</span><span class="pcard-tag">Conversion</span></div>
+              <div class="pcard-actions"><button class="pcard-btn ghost" onclick="openFigma('https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FikN9AOCDgoR7unHp0OE4I4%2FEasy-Growth%3Fnode-id%3D965-14294','Easy Growth','Desktop Prototype')"><svg viewBox="0 0 38 57" fill="none" style="width:10px;height:10px;flex-shrink:0"><path d="M19 28.5a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 019.5 38H19v9.5a9.5 9.5 0 01-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 000-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 009.5 19H19V0H9.5A9.5 9.5 0 000 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 009.5 38H19V19H9.5A9.5 9.5 0 000 28.5z" fill="#A259FF"/></svg>Preview</button><a class="pcard-btn ghost" href="https://www.figma.com/proto/ikn9AOCDgoR7unHp0OE4I4/Easy-Growth?node-id=936-177037" target="_blank"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" style="width:9px;height:9px;flex-shrink:0"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>Mobile ↗</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 — Brand Identity -->
+      <div class="ptier rv"><span class="ptier-num">04</span> Brand Identity &amp; Visual Design</div>
+      <div class="pcg rv" id="tier4">
+        <div class="pcard rv" data-category="brand">
+          <div class="pcard-img" style="background:#0a0a06">
+            
+            <div class="ggrid"></div>
+            <div class="pemoji">🍯</div>
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/844124245389383.Y3JvcCwyNzYxLDIxNjAsNTQwLDA.png" alt="Beeva Honey" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="pcard-cat">Brand Identity · UI/UX</div>
+            
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">09</div>
+              <div class="pcard-title">Beeva Honey</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Visual identity system + UI/UX — brand strategy, logo, guidelines, digital product touchpoints combined into one cohesive system.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Branding</span><span class="pcard-tag">Logo</span><span class="pcard-tag">UI/UX</span></div>
+              <div class="pcard-actions"><a class="pcard-btn primary" href="https://www.behance.net/gallery/245389383/Beeva-Honey-Visual-Identity-UIUX-Design" target="_blank"><svg viewBox="0 0 20 16" fill="currentColor" style="width:10px;height:10px;flex-shrink:0"><path d="M0 0h8.5C10.43 0 12 1.57 12 3.5S10.43 7 8.5 7H0V0zm0 9h9.5C11.98 9 14 11.02 14 13.5S11.98 18 9.5 18H0V9z"/><rect x="13" y="0" width="7" height="2" rx="1"/><path d="M13 5h7v2h-7z"/></svg>Behance</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="brand">
+          <div class="pcard-img" style="background:#060a08">
+            
+            <div class="ggrid"></div>
+            <div class="pemoji">💧</div>
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/1919f2180762515.Y3JvcCwxNDE0LDExMDYsMCww.png" alt="H2Flow" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="pcard-cat">Brand Identity · Energy</div>
+            <div class="pcard-badge">174 views</div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">10</div>
+              <div class="pcard-title">H2Flow Green Hydrogen</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Visual brand identity for a sustainable hydrogen energy startup — mark, color system, and brand guidelines.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Branding</span><span class="pcard-tag">Logo</span><span class="pcard-tag">Startup</span></div>
+              <div class="pcard-actions"><a class="pcard-btn primary" href="https://www.behance.net/gallery/180762515/H2Flow-Green-Hydrogen-Visual-Brand-Identity-Design" target="_blank"><svg viewBox="0 0 20 16" fill="currentColor" style="width:10px;height:10px;flex-shrink:0"><path d="M0 0h8.5C10.43 0 12 1.57 12 3.5S10.43 7 8.5 7H0V0zm0 9h9.5C11.98 9 14 11.02 14 13.5S11.98 18 9.5 18H0V9z"/><rect x="13" y="0" width="7" height="2" rx="1"/><path d="M13 5h7v2h-7z"/></svg>Behance</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="brand">
+          <div class="pcard-img" style="background:#080a06">
+            
+            <div class="ggrid"></div>
+            <div class="pemoji">🛒</div>
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/cf7d89202440229.Y3JvcCwxMDgwLDg0NCwwLDA.png" alt="Kefaia" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="pcard-cat">Brand Identity · Retail</div>
+            <div class="pcard-badge">156 views</div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">11</div>
+              <div class="pcard-title">Kefaia Grocery</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Complete brand identity for a grocery retail chain — mark, packaging guidelines, color system, and branded collateral.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Branding</span><span class="pcard-tag">Packaging</span><span class="pcard-tag">Retail</span></div>
+              <div class="pcard-actions"><a class="pcard-btn primary" href="https://www.behance.net/gallery/202440229/Kefaia-Grocery-Brand-Identity-Design" target="_blank"><svg viewBox="0 0 20 16" fill="currentColor" style="width:10px;height:10px;flex-shrink:0"><path d="M0 0h8.5C10.43 0 12 1.57 12 3.5S10.43 7 8.5 7H0V0zm0 9h9.5C11.98 9 14 11.02 14 13.5S11.98 18 9.5 18H0V9z"/><rect x="13" y="0" width="7" height="2" rx="1"/><path d="M13 5h7v2h-7z"/></svg>Behance</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="brand">
+          <div class="pcard-img" style="background:#080a10">
+            
+            <div class="ggrid"></div>
+            <div class="pemoji">📖</div>
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/6ac96c198629339.Y3JvcCwxNTM0LDEyMDAsMzQsMA.png" alt="JUNE" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="pcard-cat">Web UI · Publishing</div>
+            <div class="pcard-badge">141 views · 9 likes</div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">12</div>
+              <div class="pcard-title">JUNE Publishing</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Responsive UI designs for a digital publishing platform — editorial layout system across desktop, tablet, and mobile.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Web UI</span><span class="pcard-tag">Publishing</span><span class="pcard-tag">Responsive</span></div>
+              <div class="pcard-actions"><a class="pcard-btn primary" href="https://www.behance.net/gallery/198629339/JUNE-Publishing-Responsive-UI-Designs" target="_blank"><svg viewBox="0 0 20 16" fill="currentColor" style="width:10px;height:10px;flex-shrink:0"><path d="M0 0h8.5C10.43 0 12 1.57 12 3.5S10.43 7 8.5 7H0V0zm0 9h9.5C11.98 9 14 11.02 14 13.5S11.98 18 9.5 18H0V9z"/><rect x="13" y="0" width="7" height="2" rx="1"/><path d="M13 5h7v2h-7z"/></svg>Behance</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="brand">
+          <div class="pcard-img" style="background:#08090c">
+            
+            <div class="ggrid"></div>
+            <div class="pemoji">🖥️</div>
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/ce2246189128387.Y3JvcCwxNTM1LDEyMDEsMCww.png" alt="Appliances" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="pcard-cat">Web UI · E-Commerce</div>
+            <div class="pcard-badge">164 views · 6 likes</div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">13</div>
+              <div class="pcard-title">Appliances Website UI</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">UI design for an appliances e-commerce site — product catalog, filtering, detail pages, and checkout flow.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Web UI</span><span class="pcard-tag">E-Commerce</span><span class="pcard-tag">Checkout</span></div>
+              <div class="pcard-actions"><a class="pcard-btn primary" href="https://www.behance.net/gallery/189128387/UI-Design-for-Appliances-website" target="_blank"><svg viewBox="0 0 20 16" fill="currentColor" style="width:10px;height:10px;flex-shrink:0"><path d="M0 0h8.5C10.43 0 12 1.57 12 3.5S10.43 7 8.5 7H0V0zm0 9h9.5C11.98 9 14 11.02 14 13.5S11.98 18 9.5 18H0V9z"/><rect x="13" y="0" width="7" height="2" rx="1"/><path d="M13 5h7v2h-7z"/></svg>Behance</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="pcard rv" data-category="brand">
+          <div class="pcard-img" style="background:#080608">
+            
+            <div class="ggrid"></div>
+            <div class="pemoji">🐎</div>
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/329d4f148016517.Y3JvcCw0NzU4LDM3MjIsNTQxLDA.png" alt="Horse" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="pcard-cat">Logo · Brand Identity</div>
+            <div class="pcard-badge">152 views · 5 likes</div>
+          </div>
+          <div class="pcard-info">
+            <div class="pcard-title-wrap">
+              <div class="pcard-num">14</div>
+              <div class="pcard-title">Horse Logo Design</div>
+            </div>
+            <div class="pcard-reveal">
+              
+              <div class="pcard-desc">Geometric mark for a premium equestrian brand — logo construction with full brand identity system and usage guidelines.</div>
+              <div class="pcard-tags"><span class="pcard-tag">Logo</span><span class="pcard-tag">Brand Identity</span><span class="pcard-tag">Geometric</span></div>
+              <div class="pcard-actions"><a class="pcard-btn primary" href="https://www.behance.net/gallery/148016517/Horse-logo-Brand-Identity-Design" target="_blank"><svg viewBox="0 0 20 16" fill="currentColor" style="width:10px;height:10px;flex-shrink:0"><path d="M0 0h8.5C10.43 0 12 1.57 12 3.5S10.43 7 8.5 7H0V0zm0 9h9.5C11.98 9 14 11.02 14 13.5S11.98 18 9.5 18H0V9z"/><rect x="13" y="0" width="7" height="2" rx="1"/><path d="M13 5h7v2h-7z"/></svg>Behance</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pmore rv">
+        <a href="https://www.be.net/hamwisign" target="_blank" class="btn-o" style="font-size:13px;display:inline-flex;gap:8px;align-items:center">
+          <svg viewBox="0 0 20 16" fill="currentColor" style="width:14px;height:14px"><path d="M0 0h8.5C10.43 0 12 1.57 12 3.5S10.43 7 8.5 7H0V0zm0 9h9.5C11.98 9 14 11.02 14 13.5S11.98 18 9.5 18H0V9z"/></svg>
+          View all 20+ projects on Behance
+        </a>
+      </div>
+    </section>
+    <div class="divider"></div>
+
+    </main>
+    
+    <!-- ══ IMPACT METRICS ══ -->
+    <section
+      class="sec"
+      style="padding-top: 72px; padding-bottom: 72px"
+      id="impact"
+      aria-labelledby="impact-heading"
+    >
+      <h2 class="sh" id="impact-heading" style="text-align: center; margin-bottom: 48px;">Impact &amp; <em>Metrics</em></h2>
+      <div class="iband rv">
+        <div class="icell">
+          <div class="icn">+<em>25</em>%</div>
+          <div class="icl">User Satisfaction Uplift</div>
+        </div>
+        <div class="icell">
+          <div class="icn">+<em>30</em>%</div>
+          <div class="icl">Brand Visibility Increase</div>
+        </div>
+        <div class="icell">
+          <div class="icn"><em>15</em>K+</div>
+          <div class="icl">Behance Project Views</div>
+        </div>
+        <div class="icell">
+          <div class="icn"><em>885</em></div>
+          <div class="icl">Appreciations Received</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ EXPERIENCE ══ -->
+    <section class="sec alt2" id="experience" aria-labelledby="experience-heading">
+      <div class="stag">Experience</div>
+      <h2 class="sh" id="experience-heading">Where I've <em>Made Impact</em></h2>
+
+      <div class="eitem">
+        <div>
+          <div class="elogo">GS</div>
+          <div class="eperiod">Nov 2024 – Nov 2025</div>
+          <div class="etype">Part-Time · Remote</div>
+          <div class="eloc">Riyadh, Saudi Arabia</div>
+        </div>
+        <div>
+          <div class="erole">UI/UX Designer</div>
+          <div class="eco">Golden Sands</div>
+          <ul class="ebuls">
+            <li>
+              Created innovative, user-aligned landing page designs backed by
+              competitor analysis.
+            </li>
+            <li>
+              Built design systems, user journey maps, and user flows for
+              products and features.
+            </li>
+            <li>
+              Delivered high-fidelity interactive prototypes and led iterative
+              UX testing cycles.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="eitem">
+        <div>
+          <div class="elogo">NBS</div>
+          <div class="eperiod">Nov 2024 – Nov 2025</div>
+          <div class="etype">Part-Time · Remote</div>
+          <div class="eloc">Istanbul, Turkey</div>
+        </div>
+        <div>
+          <div class="erole">UI/UX Designer</div>
+          <div class="eco">NBS Venture</div>
+          <ul class="ebuls">
+            <li>
+              Designed websites and mobile applications for multiple client
+              projects simultaneously.
+            </li>
+            <li>
+              Collaborated with dev teams to ensure pixel-perfect implementation
+              per UX/UI standards.
+            </li>
+            <li>
+              Ran user testing sessions and delivered iterative design
+              improvements based on feedback.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="eitem">
+        <div>
+          <div class="elogo">MM</div>
+          <div class="eperiod">Jul – Sep 2024</div>
+          <div class="etype">Full-Time</div>
+          <div class="eloc">Damascus, Syria</div>
+        </div>
+        <div>
+          <div class="erole">Senior Graphic Designer</div>
+          <div class="eco">Mesh-Mosh Marketing Lab</div>
+          <ul class="ebuls">
+            <li>
+              Led creative output across social media, web, marketing campaigns,
+              and motion graphics.
+            </li>
+            <li>
+              Managed end-to-end campaign design on Google Ads, Meta, and
+              Snapchat.
+            </li>
+            <li>
+              Co-designed company website in direct collaboration with the
+              development team.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="eitem">
+        <div>
+          <div class="elogo">2P</div>
+          <div class="eperiod">Nov 2023 – Mar 2024</div>
+          <div class="etype">Full-Time · Remote</div>
+          <div class="eloc">Istanbul, Turkey</div>
+        </div>
+        <div>
+          <div class="erole">UI &amp; Graphic Designer</div>
+          <div class="eco">2P for PR and Digital Marketing</div>
+          <ul class="ebuls">
+            <li>
+              Redesigned website UIs for ~5 clients across diverse industries
+              following UX best practices.
+            </li>
+            <li>
+              Owned company website redesign — from audit through to dev
+              handoff.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="eitem">
+        <div>
+          <div class="elogo">ET</div>
+          <div class="eperiod">May 2022 – Nov 2023</div>
+          <div class="etype">Full-Time</div>
+          <div class="eloc">Damascus, Syria</div>
+        </div>
+        <div>
+          <div class="erole">UI/UX &amp; Graphic Designer</div>
+          <div class="eco">Etloob — اطلب</div>
+          <ul class="ebuls">
+            <li>
+              +25% user satisfaction improvement through systematic UI/UX
+              overhaul in Figma.
+            </li>
+            <li>
+              +30% brand visibility and +18% online sales through design
+              strategy and campaigns.
+            </li>
+            <li>
+              +20% click-through rate via motion video campaigns; +15% customer
+              engagement increase.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="eitem">
+        <div>
+          <div class="elogo">AM</div>
+          <div class="eperiod">Jan – Nov 2023</div>
+          <div class="etype">Part-Time · Remote</div>
+          <div class="eloc">Dubai, UAE</div>
+        </div>
+        <div>
+          <div class="erole">Motion &amp; Graphic Designer</div>
+          <div class="eco">Affiliate Mates Network</div>
+          <ul class="ebuls">
+            <li>
+              +20% engagement increase through targeted social and marketing
+              visual campaigns.
+            </li>
+            <li>
+              +15% rise in affiliate sign-ups via creative campaigns using Adobe
+              Creative Suite.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="eitem">
+        <div>
+          <div class="elogo">CL</div>
+          <div class="eperiod">Aug 2022 – Mar 2025</div>
+          <div class="etype">Part-Time · Remote</div>
+          <div class="eloc">Riyadh, Saudi Arabia</div>
+        </div>
+        <div>
+          <div class="erole">Creative Graphic Designer</div>
+          <div class="eco">Crystalat for Lighting</div>
+          <ul class="ebuls">
+            <li>
+              Social media, web, motion graphics and marketing campaigns for a
+              luxury lighting brand.
+            </li>
+            <li>
+              Ad campaigns across Google Ads, Meta, and Snapchat platforms.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="eitem">
+        <div>
+          <div class="elogo">GR</div>
+          <div class="eperiod">Oct 2021 – Nov 2022</div>
+          <div class="etype">Volunteer · Remote</div>
+          <div class="eloc">Berlin, Germany</div>
+        </div>
+        <div>
+          <div class="erole">Graphic Designer</div>
+          <div class="eco">German Syrian Research Society</div>
+          <ul class="ebuls">
+            <li>
+              Designed social media, posters, and event campaigns for the Syrian
+              community in Germany.
+            </li>
+            <li>
+              +15% increase in visual content output through consistent
+              volunteer contribution.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ SKILLS ══ -->
+    <section class="sec alt" id="skills" aria-labelledby="skills-heading">
+      <div class="stag">Capabilities</div>
+      <h2 class="sh" id="skills-heading">Tools &amp; <em>Craft</em></h2>
+      <div class="sgrid rv">
+        <div class="sg">
+          <div class="sgt">UI/UX Design</div>
+          <div class="sgtags">
+            <span class="stk hi">Figma</span
+            ><span class="stk hi">UI Design</span
+            ><span class="stk hi">UX Research</span>
+            <span class="stk">Design Systems</span
+            ><span class="stk">Prototyping</span
+            ><span class="stk">User Flows</span>
+            <span class="stk">Journey Mapping</span
+            ><span class="stk">Usability Testing</span>
+          </div>
+        </div>
+        <div class="sg">
+          <div class="sgt">Creative &amp; Adobe</div>
+          <div class="sgtags">
+            <span class="stk hi">Illustrator</span
+            ><span class="stk hi">Photoshop</span
+            ><span class="stk hi">After Effects</span>
+            <span class="stk">Adobe XD</span><span class="stk">InDesign</span
+            ><span class="stk">Premiere Pro</span>
+            <span class="stk">Motion Graphics</span
+            ><span class="stk">Canva</span>
+          </div>
+        </div>
+        <div class="sg">
+          <div class="sgt">No-Code &amp; Dev</div>
+          <div class="sgtags">
+            <span class="stk hi">Webflow</span><span class="stk hi">Framer</span
+            ><span class="stk hi">HTML &amp; CSS</span>
+            <span class="stk">JavaScript</span><span class="stk">React</span
+            ><span class="stk">Tailwind CSS</span>
+            <span class="stk">Bootstrap 5</span
+            ><span class="stk">Git / GitHub</span>
+          </div>
+        </div>
+        <div class="sg">
+          <div class="sgt">Brand &amp; Visual</div>
+          <div class="sgtags">
+            <span class="stk hi">Branding</span
+            ><span class="stk hi">Logo Design</span
+            ><span class="stk">Visual Identity</span>
+            <span class="stk">Social Media</span
+            ><span class="stk">Print Design</span
+            ><span class="stk">Typography</span>
+          </div>
+        </div>
+        <div class="sg">
+          <div class="sgt">Soft Skills</div>
+          <div class="sgtags">
+            <span class="stk">Design Thinking</span
+            ><span class="stk">Critical Thinking</span
+            ><span class="stk">Communication</span>
+            <span class="stk">Public Speaking</span
+            ><span class="stk">Teamwork</span
+            ><span class="stk">Self-Learning</span>
+          </div>
+        </div>
+        <div class="sg">
+          <div class="sgt">Productivity</div>
+          <div class="sgtags">
+            <span class="stk">Jira</span><span class="stk">Notion</span
+            ><span class="stk">ClickUp</span> <span class="stk">Trello</span
+            ><span class="stk">Hubstaff</span
+            ><span class="stk">Google Suite</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 64px">
+        <div class="stag" style="margin-bottom: 20px">
+          Education &amp; Courses
+        </div>
+        <div class="egrid rv">
+          <div class="edc">
+            <div class="edyr">2016–2021</div>
+            <div class="edtitle">B.Sc. Civil Engineering</div>
+            <div class="edorg">Damascus University</div>
+          </div>
+          <div class="edc">
+            <div class="edyr">2024 · 100 hours</div>
+            <div class="edtitle">Interactive UX Design Bootcamp</div>
+            <div class="edorg">Cradis.co</div>
+          </div>
+          <div class="edc">
+            <div class="edyr">Feb 2026 · 80 hours</div>
+            <div class="edtitle">Game Design &amp; Development</div>
+            <div class="edorg">8Bits Lab, Digit Hub Damascus</div>
+          </div>
+          <div class="edc">
+            <div class="edyr">Oct 2024 · 40 hours</div>
+            <div class="edtitle">Takween⁴ Entrepreneurship Bootcamp</div>
+            <div class="edorg">Al-Baraka Bank, Damascus</div>
+          </div>
+          <div class="edc">
+            <div class="edyr">Feb 2025</div>
+            <div class="edtitle">Hackathon for Syria</div>
+            <div class="edorg">Startup Syria, Damascus</div>
+          </div>
+          <div class="edc">
+            <div class="edyr">2024</div>
+            <div class="edtitle">Responsive Websites with HTML &amp; CSS</div>
+            <div class="edorg">Almdrasa.com</div>
+          </div>
+          <div class="edc">
+            <div class="edyr">2022 · Meta / Coursera</div>
+            <div class="edtitle">Front-End Development</div>
+            <div class="edorg">Coursera.org</div>
+          </div>
+          <div class="edc">
+            <div class="edyr">2022 · CALARTS / Coursera</div>
+            <div class="edtitle">Fundamentals of Graphic Design</div>
+            <div class="edorg">Coursera.org</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ CONTACT ══ -->
+    <section class="sec alt2" id="contact" aria-labelledby="contact-heading">
+      <div class="cgrid">
+        <div class="rv">
+          <div class="stag" style="margin-bottom: 20px">Get in Touch</div>
+          <div class="cbig" id="contact-heading">Let's Build<br /><em>Something Great</em></div>
+          <p class="csub">
+            Open to freelance projects, full-time roles, and creative
+            collaborations worldwide. Senior-level design thinking with a track
+            record of measurable outcomes.
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap">
+            <a href="https://wa.me/963988594320" target="_blank" class="btn-p">💬 Message on WhatsApp</a
+            >
+            <a
+              href="https://linkedin.com/in/mohammad-hamwi"
+              target="_blank"
+              class="btn-o"
+              >LinkedIn ↗</a
+            >
+          </div>
+        </div>
+        <div class="rv d1">
+          <div class="clinks">
+            <a class="clink" href="mailto:hamwisign@gmail.com">hamwisign@gmail.com <span class="clk">Email</span></a
+            >
+            <a class="clink" href="https://wa.me/963988594320" target="_blank"
+              >+963 988 594 320 <span class="clk">WhatsApp</span></a
+            >
+            <a
+              class="clink"
+              href="https://linkedin.com/in/mohammad-hamwi"
+              target="_blank"
+              >linkedin.com/in/mohammad-hamwi
+              <span class="clk">LinkedIn</span></a
+            >
+            <a class="clink" href="https://www.be.net/hamwisign" target="_blank"
+              >behance.net/hamwisign <span class="clk">Behance</span></a
+            >
+            <a class="clink" href="https://github.com/MHamwi" target="_blank"
+              >github.com/MHamwi <span class="clk">GitHub</span></a
+            >
+          </div>
+          <div class="rbox">
+            REFERENCES ON REQUEST<br />Abdulrahman Foutaina — Co-Founder,
+            ETLOOB.com · <a href="mailto:Admin@etloob.com">Admin@etloob.com</a><br />Ahmed Helal Eddin — HR Manager,
+            DSFG e.V. · <a href="mailto:info@ds-fg.de">info@ds-fg.de</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer role="contentinfo">
+      <div class="flogo">Mohammad <em>Hamwi</em></div>
+      <div class="fcopy">© 2025 · UI/UX Designer · Damascus, Syria</div>
+      <div class="flinks">
+        <a href="https://linkedin.com/in/mohammad-hamwi" target="_blank" aria-label="LinkedIn profile"
+          >LinkedIn</a
+        >
+        <a href="https://www.be.net/hamwisign" target="_blank" aria-label="Behance portfolio">Behance</a>
+        <a href="https://github.com/MHamwi" target="_blank" aria-label="GitHub profile">GitHub</a>
+        <a href="mailto:hamwisign@gmail.com" aria-label="Email contact">Email</a>
+      </div>
+    </footer>
+
+    <script>
+      // Register GSAP plugins
+      gsap.registerPlugin(ScrollTrigger, TextPlugin);
+      
+      /* ── CURSOR ── */
+      const cur = document.getElementById("cur"),
+        cr = document.getElementById("cr");
+      let mx = 0,
+        my = 0,
+        rx = 0,
+        ry = 0;
+      document.addEventListener("mousemove", (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        gsap.to(cur, {
+          x: mx - 5,
+          y: my - 5,
+          duration: 0.1,
+          ease: "power2.out"
+        });
+      });
+      (function loop() {
+        rx += (mx - rx) * 0.1;
+        ry += (my - ry) * 0.1;
+        gsap.to(cr, {
+          x: rx - 19,
+          y: ry - 19,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+        requestAnimationFrame(loop);
+      })();
+      document.querySelectorAll("a,button,.pc,.wc,.pbtn").forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          document.body.classList.add("ch");
+          gsap.to(cur, { backgroundColor: "var(--cyan)", duration: 0.15 });
+        });
+        el.addEventListener("mouseleave", () => {
+          document.body.classList.remove("ch");
+          gsap.to(cur, { backgroundColor: "var(--bll)", duration: 0.15 });
+        });
+      });
+
+      /* ── CANVAS PARTICLES ── */
+      (function () {
+        const canvas = document.getElementById("cv"),
+          ctx = canvas.getContext("2d");
+        let W,
+          H,
+          pts = [];
+        function resize() {
+          W = canvas.width = canvas.offsetWidth;
+          H = canvas.height = canvas.offsetHeight;
+        }
+        resize();
+        window.addEventListener("resize", () => {
+          resize();
+          init();
+        });
+        function Pt() {
+          this.x = Math.random() * W;
+          this.y = Math.random() * H;
+          this.vx = (Math.random() - 0.5) * 0.36;
+          this.vy = (Math.random() - 0.5) * 0.36;
+          this.r = Math.random() * 1.5 + 0.4;
+          this.a = Math.random() * 0.35 + 0.08;
+        }
+        function init() {
+          pts = [];
+          const n = Math.floor((W * H) / 11000);
+          for (let i = 0; i < n; i++) pts.push(new Pt());
+        }
+        init();
+        let mX = W / 2,
+          mY = H / 2;
+        document.addEventListener("mousemove", (e) => {
+          const r = canvas.getBoundingClientRect();
+          mX = e.clientX - r.left;
+          mY = e.clientY - r.top;
+        });
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+          pts.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0) p.x = W;
+            if (p.x > W) p.x = 0;
+            if (p.y < 0) p.y = H;
+            if (p.y > H) p.y = 0;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(77,148,255,${p.a})`;
+            ctx.fill();
+            for (let j = i + 1; j < pts.length; j++) {
+              const q = pts[j],
+                dx = p.x - q.x,
+                dy = p.y - q.y,
+                d = Math.sqrt(dx * dx + dy * dy);
+              if (d < 110) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+                ctx.strokeStyle = `rgba(77,148,255,${0.08 * (1 - d / 110)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
+            }
+            const md = Math.sqrt((p.x - mX) ** 2 + (p.y - mY) ** 2);
+            if (md < 150) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(mX, mY);
+              ctx.strokeStyle = `rgba(0,200,240,${0.15 * (1 - md / 150)})`;
+              ctx.lineWidth = 0.9;
+              ctx.stroke();
+            }
+          });
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+
+      /* ── DRY: COMMON ANIMATION CONFIGURATIONS ── */
+      const animationConfigs = {
+        // Scroll reveal animations
+        scrollReveal: {
+          from: { y: 60, opacity: 0 },
+          to: {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out"
+          }
+        },
+        // Experience items animation
+        experienceItem: {
+          from: { x: -60, opacity: 0 },
+          to: {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out"
+          }
+        },
+        // Hero entrance animations
+        heroEntrance: [
+          { selector: ".hbadge", delay: 0 },
+          { selector: ".hh .hl", delay: -0.4 },
+          { selector: ".hdesc", delay: -0.3 },
+          { selector: ".hacts", delay: -0.2 },
+          { selector: ".shint", delay: -0.1 }
+        ]
+      };
+      
+      /* ── DRY: ANIMATION HELPERS ── */
+      function createScrollAnimation(element, config = {}) {
+        const animationConfig = { ...animationConfigs.scrollReveal.to, ...config };
+        return gsap.fromTo(element, animationConfigs.scrollReveal.from, animationConfig);
+      }
+      
+      function createExperienceAnimation(element, delay = 0) {
+        const config = { ...animationConfigs.experienceItem.to, delay };
+        return gsap.fromTo(element, animationConfigs.experienceItem.from, config);
+      }
+      
+      /* ── DRY: HERO ENTRANCE ANIMATIONS ── */
+      function animateHeroEntrance() {
+        const timeline = gsap.timeline();
+        
+        animationConfigs.heroEntrance.forEach(({ selector, delay }) => {
+          timeline.from(selector, {
+            y: selector === ".hh .hl" ? 50 : 30,
+            opacity: 0,
+            duration: selector === ".shint" ? 0.6 : 0.8,
+            ease: "power3.out"
+          }, delay);
+        });
+        
+        // Widget entrance animations with stagger
+        gsap.from(".fw", {
+          y: 40,
+          opacity: 0,
+          scale: 0.95,
+          duration: 0.8,
+          ease: "back.out(1.7)",
+          stagger: 0.1
+        });
+        
+        return timeline;
+      }
+      
+      // Initialize hero animations
+      animateHeroEntrance();
+      /* ── CYCLE WORDS WITH GSAP ── */
+      const words = document.querySelectorAll(".cw");
+      let currentIndex = 0;
+      
+      function cycleWords() {
+        const currentWord = words[currentIndex];
+        const nextIndex = (currentIndex + 1) % words.length;
+        const nextWord = words[nextIndex];
+        
+        gsap.timeline()
+          .to(currentWord, {
+            y: -40,
+            opacity: 0,
+            duration: 0.4,
+            ease: "power2.in"
+          })
+          .set(currentWord, { className: "cw off" })
+          .set(nextWord, { className: "cw on" })
+          .fromTo(nextWord,
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
+          );
+          
+        currentIndex = nextIndex;
+      }
+      
+      setInterval(cycleWords, 2700);
+
+      /* ── PROJECT CARD FILTER & 3D TILT ── */
+      (function () {
+        // Filter tabs
+        document.querySelectorAll('.pf-tab').forEach(function(tab) {
+          tab.addEventListener('click', function() {
+            document.querySelectorAll('.pf-tab').forEach(function(t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+            var filter = tab.dataset.filter;
+            document.querySelectorAll('.pcard').forEach(function(card) {
+              var match = filter === 'all' || card.dataset.category === filter;
+              card.classList.toggle('hidden', !match);
+            });
+            document.querySelectorAll('.ptier').forEach(function(tier) {
+              var grid = tier.nextElementSibling;
+              if (!grid) return;
+              var visible = grid.querySelectorAll('.pcard:not(.hidden)').length;
+              tier.style.display = visible ? '' : 'none';
+              grid.style.display = visible ? '' : 'none';
+            });
+          });
+        });
+
+      /* ── PROJECT CARD 3D TILT WITH GSAP ── */
+      document.querySelectorAll('.pcard').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          
+          gsap.to(card, {
+            rotationY: x * 8,
+            rotationX: -y * 6,
+            scale: 1.02,
+            duration: 0.3,
+            ease: "power2.out",
+            transformPerspective: 800
+          });
+          
+          // Dynamic shadow
+          const shadowX = -x * 20;
+          const shadowY = y * 20;
+          gsap.to(card, {
+            boxShadow: `${shadowX}px ${shadowY}px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(77,148,255,0.18)`,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          gsap.to(card, {
+            rotationY: 0,
+            rotationX: 0,
+            scale: 1,
+            boxShadow: '',
+            duration: 0.4,
+            ease: "power2.out"
+          });
+        });
+      });
+      })();
+
+      /* ── WIDGET PARALLAX WITH GSAP ── */
+      const hero = document.querySelector(".hero");
+      const widgets = document.querySelectorAll(".fw");
+      const depths = [0.9, 1.1, 0.7, 1.3, 0.85, 1.0];
+      
+      hero.addEventListener("mousemove", (e) => {
+        const rect = hero.getBoundingClientRect();
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const moveX = (e.clientX - rect.left - centerX) / centerX;
+        const moveY = (e.clientY - rect.top - centerY) / centerY;
+        
+        widgets.forEach((widget, index) => {
+          const depth = depths[index] || 1;
+          const x = moveX * depth * 8;
+          const y = moveY * depth * 6;
+          
+          gsap.to(widget, {
+            x: x,
+            y: y,
+            duration: 0.6,
+            ease: "power2.out"
+          });
+        });
+      });
+      
+      hero.addEventListener("mouseleave", () => {
+        gsap.to(widgets, {
+          x: 0,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      });
+
+      /* ── TOOL CYCLE ── */
+      (function () {
+        const t = document.querySelectorAll(".wttag");
+        const sets = [
+          [0, 1, 4],
+          [2, 3, 5],
+          [0, 4],
+          [1, 2, 3],
+        ];
+        let i = 0;
+        setInterval(() => {
+          t.forEach((x) => x.classList.remove("on"));
+          sets[i % sets.length].forEach((n) => {
+            if (t[n]) t[n].classList.add("on");
+          });
+          i++;
+        }, 2000);
+      })();
+
+      /* ── COUNTERS ── */
+      function countUp(el, target, dur) {
+        let s = 0;
+        const isF = !Number.isInteger(target);
+        const step = target / (dur / 16);
+        const t = setInterval(() => {
+          s += step;
+          if (s >= target) {
+            s = target;
+            clearInterval(t);
+          }
+          el.textContent = isF ? s.toFixed(1) : Math.floor(s);
+        }, 16);
+      }
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              countUp(document.getElementById("c1"), 25, 1100);
+              countUp(document.getElementById("c2"), 30, 1400);
+              countUp(document.getElementById("c3"), 15.5, 1700);
+            }
+          });
+        },
+        { threshold: 0.3 },
+      ).observe(document.querySelector(".fw-stat"));
+
+      /* ── DRY: SCROLL REVEAL ANIMATIONS ── */
+      function initializeScrollAnimations() {
+        // General scroll reveal animations
+        gsap.utils.toArray(".rv").forEach(element => {
+          createScrollAnimation(element, {
+            scrollTrigger: {
+              trigger: element,
+              start: "top 85%",
+              end: "bottom 15%",
+              toggleActions: "play none none reverse"
+            }
+          });
+        });
+        
+        // Experience items with stagger
+        gsap.utils.toArray(".eitem").forEach((item, index) => {
+          createExperienceAnimation(item, index * 0.1).scrollTrigger = {
+            trigger: item,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          };
+        });
+      }
+      
+      // Initialize scroll animations
+      initializeScrollAnimations();
+
+      /* ── NAVIGATION SCROLL WITH GSAP ── */
+      const nav = document.getElementById("nav");
+      
+      ScrollTrigger.create({
+        start: "top -80",
+        end: 99999,
+        toggleClass: {className: "scrolled", targets: nav},
+        onUpdate: self => {
+          const progress = self.progress;
+          gsap.to(nav, {
+            backgroundColor: `rgba(6, 9, 15, ${0.97 + progress * 0.01})`,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        }
+      });
+      
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            gsap.to(window, {
+              duration: 1.5,
+              scrollTo: {
+                y: target,
+                offsetY: 80,
+                autoKill: false
+              },
+              ease: "power2.inOut"
+            });
+          }
+        });
+      });
+
+      /* ── ENHANCED FIGMA MODAL WITH GSAP ── */
+      let currentFigmaUrl = "";
+      
+      // DRY: Common animation settings
+      const modalAnimationConfig = {
+        scale: 0.9,
+        opacity: 0,
+        y: 30,
+        duration: 0.4,
+        ease: "back.out(1.7)"
+      };
+      
+      function openFigma(embedUrl, title, subtitle) {
+        currentFigmaUrl = embedUrl;
+        const modal = document.getElementById("figma-modal");
+        const modalInner = modal.querySelector(".fm-inner");
+        const titleEl = document.getElementById("fm-title");
+        const subtitleEl = document.getElementById("fm-subtitle");
+        const loading = document.getElementById("fm-loading");
+        const iframe = document.getElementById("fm-iframe");
+        
+        // DRY: Set content using helper function
+        setModalContent(titleEl, subtitleEl, title, subtitle);
+        
+        // Reset and show loading
+        loading.style.display = "flex";
+        iframe.src = "";
+        
+        // Add open class and animate modal in
+        modal.classList.add("open");
+        animateModalIn(modal, modalInner);
+        
+        // Load iframe after animation starts
+        setTimeout(() => {
+          iframe.src = embedUrl;
+        }, 200);
+        
+        document.body.style.overflow = "hidden";
+        
+        // Announce to screen readers
+        titleEl.setAttribute("role", "alert");
+        setTimeout(() => titleEl.removeAttribute("role"), 1000);
+      }
+      
+      // DRY: Helper functions
+      function setModalContent(titleEl, subtitleEl, title, subtitle) {
+        titleEl.textContent = title || "Figma Preview";
+        subtitleEl.textContent = subtitle || "Interactive Design";
+      }
+      
+      function animateModalIn(modal, modalInner) {
+        gsap.set(modal, { display: "flex" });
+        gsap.fromTo(modalInner, modalAnimationConfig, {
+          scale: 1,
+          opacity: 1,
+          y: 0
+        });
+      }
+      
+      function closeFigmaModal() {
+        const modal = document.getElementById("figma-modal");
+        const modalInner = modal.querySelector(".fm-inner");
+        const iframe = document.getElementById("fm-iframe");
+        
+        // DRY: Use reverse animation config
+        gsap.to(modalInner, {
+          ...modalAnimationConfig,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            resetModalState(modal, iframe);
+          }
+        });
+      }
+      
+      // DRY: Helper function to reset modal state
+      function resetModalState(modal, iframe) {
+        modal.classList.remove("open");
+        iframe.src = "";
+        document.body.style.overflow = "";
+        gsap.set(modal, { display: "none" });
+      }
+      
+      // Close modal on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.getElementById("figma-modal").classList.contains("open")) {
+          closeFigmaModal();
+        }
+      });
+      
+      // Close modal on background click
+      document.getElementById("figma-modal").addEventListener('click', (e) => {
+        if (e.target.id === "figma-modal") {
+          closeFigmaModal();
+        }
+      });
+      
+      function openFigmaTab() {
+        const url = currentFigmaUrl
+          .replace("https://www.figma.com/embed?embed_host=share&url=", "")
+          .replace(/^https?:\/\//, "https://");
+        window.open(decodeURIComponent(url), "_blank");
+      }
+      /* ── KEYBOARD NAVIGATION ENHANCEMENTS ── */
+      document.addEventListener('keydown', (e) => {
+        // Tab trap for modal
+        if (e.key === 'Tab' && document.getElementById("figma-modal").classList.contains("open")) {
+          const focusableElements = document.getElementById("figma-modal").querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          );
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+          
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              lastElement.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              firstElement.focus();
+              e.preventDefault();
+            }
+          }
+        }
+        
+        // Arrow key navigation for project cards
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+          const currentCard = document.activeElement.closest('.pcard');
+          if (currentCard) {
+            const cards = Array.from(document.querySelectorAll('.pcard:not(.hidden)'));
+            const currentIndex = cards.indexOf(currentCard);
+            let nextIndex;
+            
+            if (e.key === 'ArrowRight') {
+              nextIndex = (currentIndex + 1) % cards.length;
+            } else {
+              nextIndex = (currentIndex - 1 + cards.length) % cards.length;
+            }
+            
+            cards[nextIndex].querySelector('.pcard-title').focus();
+            e.preventDefault();
+          }
+        }
+      });
+      
+      /* ── RESPONSIVE ENHANCEMENTS ── */
+      // Touch device detection
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      
+      if (isTouchDevice) {
+        // Disable custom cursor on touch devices
+        document.getElementById('cur').style.display = 'none';
+        document.getElementById('cr').style.display = 'none';
+        document.body.style.cursor = 'auto';
+        
+        // Enhanced touch interactions for project cards
+        document.querySelectorAll('.pcard').forEach(card => {
+          card.addEventListener('touchstart', function() {
+            gsap.to(this, {
+              scale: 0.98,
+              duration: 0.1,
+              ease: "power2.out"
+            });
+          });
+          
+          card.addEventListener('touchend', function() {
+            gsap.to(this, {
+              scale: 1,
+              duration: 0.2,
+              ease: "power2.out"
+            });
+          });
+        });
+      }
+      
+      /* ── PERFORMANCE OPTIMIZATIONS ── */
+      // Reduce motion for users who prefer it
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      
+      if (prefersReducedMotion.matches) {
+        gsap.globalTimeline.timeScale(0.5);
+        document.querySelectorAll('.glw, #cv').forEach(el => {
+          el.style.display = 'none';
+        });
+      }
+      
+      /* ── ERROR HANDLING FOR EXTERNAL RESOURCES ── */
+      document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', function() {
+          this.style.opacity = '0.3';
+          this.setAttribute('alt', 'Image failed to load');
+        });
+      });
+      
+      /* ── ANNOUNCEMENTS FOR SCREEN READERS ── */
+      function announceToScreenReader(message) {
+        const announcement = document.createElement('div');
+        announcement.setAttribute('role', 'status');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.className = 'sr-only';
+        announcement.textContent = message;
+        document.body.appendChild(announcement);
+        setTimeout(() => document.body.removeChild(announcement), 1000);
+      }
+    </script>
+  </body>
+</html>
